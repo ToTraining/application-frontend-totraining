@@ -6,7 +6,6 @@ import { api } from "../service/api";
 
 interface LoginContextProps {
   toLogin: (data: FieldValues) => void;
-  userToken: string | undefined;
   navigate: NavigateFunction;
 }
 
@@ -19,7 +18,6 @@ export const LoginContext = createContext<LoginContextProps>(
 );
 
 const LoginProvider = ({ children }: LoginProviderProps) => {
-  const [userToken, setUserToken] = useState<string>();
   const notiFy = (message: string) =>
     toast(message, {
       position: "top-right",
@@ -39,7 +37,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         localStorage.setItem("userToken", "response.datas.token");
         notiFy("Login efetuado com sucesso!");
         navigate("/dashboard");
-        setUserToken("response.datas.token");
+
         console.log(response);
       })
       .catch((err) => {
@@ -49,7 +47,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
   };
 
   return (
-    <LoginContext.Provider value={{ toLogin, navigate, userToken }}>
+    <LoginContext.Provider value={{ toLogin, navigate }}>
       {children}
     </LoginContext.Provider>
   );
