@@ -2,55 +2,21 @@ import { Main } from "./style";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { toast } from "react-toastify";
-// import { ILogin } from "../../Interfaces/Interface";
+import { useState, useContext } from "react";
+import { LoginContext } from "../../Context/LoginContext";
 
 export const Login = () => {
+  const { navigate, toLogin } = useContext(LoginContext);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const LoginSucess = () => {
-    toast.success("Login efetuado com sucesso!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
+  const tooglePassword = () => {
+    setShowPassword(!showPassword);
   };
 
-  const LoginFailed = () => {
-    toast.error("O login não foi bem sucedido!", {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
-  const navigate = useNavigate();
-
-  const tooglePassword = ()=>{
-    setShowPassword(!showPassword)
+  interface ILoginData {
+    email: string;
+    password: string;
   }
-
-  const goToRegister = ()=>{
-    navigate("/register")
-  }
-
-  const [showPassword, setShowPassword] = useState(false)
-
-    interface ILoginData{
-        email: string
-        password: string
-    }
-
 
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatórios"),
@@ -64,28 +30,6 @@ export const Login = () => {
   } = useForm<ILoginData>({
     resolver: yupResolver(formSchema),
   });
-
- const toLogin = (data:any)=>{
-  LoginSucess()
-  console.log(data)
- }
-
-  // const toLogin = (data: ILoginData ) => {
-
-  //   axios
-  //   .post("UrlAqui", data)
-  //   .then((response) => {
-  //     localStorage.setItem("token", "resposta da API");
-  //     LoginSucess()
-  //     navigate("/dashboard");
-  //     return console.log(response);
-  //   })
-  //   .catch((err) => {
-  //     LoginFailed()
-  //     console.log(err);
-  //   });
-    
-  // };
   return (
     <Main>
       <img
@@ -103,16 +47,24 @@ export const Login = () => {
 
           <label htmlFor="password">Password</label>
           <div>
-
-            <input id="password" type={showPassword? "text":"password" } {...register("password")} />
-            <button onClick={tooglePassword} type="button">Toogle</button>
-
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              {...register("password")}
+            />
+            <button onClick={tooglePassword} type="button">
+              Toogle
+            </button>
           </div>
           <p>{errors.password?.message}</p>
 
-          <button className="btnLogin" type="submit">Login</button>
+          <button className="btnLogin" type="submit">
+            Login
+          </button>
 
-          <button onClick={goToRegister}>Ainda não tem conta ? Registre-se aqui :) </button>
+          <button onClick={(event) => navigate("/dashboard")}>
+            Ainda não tem conta ? Registre-se aqui.
+          </button>
         </form>
       </div>
     </Main>
