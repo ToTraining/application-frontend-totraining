@@ -32,7 +32,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
 
   const toLogin = (data: FieldValues) => {
     api
-      .post("/camiho", data)
+      .post("/login", data)
       .then((response) => {
         localStorage.setItem("userToken", response.data.accessToken);
         notiFy("Login efetuado com sucesso!");
