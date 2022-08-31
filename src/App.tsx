@@ -3,12 +3,15 @@ import logo from './logo.svg';
 import './App.css';
 import MyRouter from './Routes';
 import { ToastContainer } from 'react-toastify';
+import { NextUIProvider } from '@nextui-org/react';
 
 function App() {
   return (
     <div className="App">
-      <MyRouter/>
-      <ToastContainer/>
+      <NextUIProvider>
+        <MyRouter/>
+        <ToastContainer/>
+      </NextUIProvider>
 
       {/* <Login/> */}
     </div>
