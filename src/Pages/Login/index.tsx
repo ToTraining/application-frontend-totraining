@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useState, useContext } from "react";
 import { LoginContext } from "../../Context/LoginContext";
 
-export const Login = () => {
+const Login = () => {
   const { navigate, toLogin } = useContext(LoginContext);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -70,3 +70,5 @@ export const Login = () => {
     </Main>
   );
 };
+
+export default Login;

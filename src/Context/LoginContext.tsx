@@ -34,7 +34,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
     api
       .post("/camiho", data)
       .then((response) => {
-        localStorage.setItem("userToken", "response.datas.token");
+        localStorage.setItem("userToken", response.data.accessToken);
         notiFy("Login efetuado com sucesso!");
         navigate("/dashboard");
 
