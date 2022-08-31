@@ -1,12 +1,17 @@
-import { FieldValues, useForm } from "react-hook-form";
+import {useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import * as React from "react";
 import { Input } from "@nextui-org/react";
-import { api } from "../../service/api";
+import { useContext } from "react";
+import { RegisterContext } from "../../Context/RegisterContext";
+
 
 const Register = () => {
+  const { navigate, registerUser } = useContext(RegisterContext);
+
+
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome Obrigatório"),
     email: yup.string().required("Email obrigatório").email("E-mail inválido"),
@@ -39,18 +44,8 @@ const Register = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(formSchema) });
 
-  const registerUser = (data: FieldValues) => {
-    api
-      .post("/rota", data)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
+    <>
     <div>
       <div>
         <h1>Registro</h1>
@@ -92,9 +87,15 @@ const Register = () => {
 
         <div>
           <button type="submit">Cadastrar</button>
+          <button onClick={(event) => navigate("/login")}>
+            Já possui registro ? Faça o seu login.
+            </button>
         </div>
       </form>
     </div>
-  );
-};
+    </>
+    )
+    }
+  
+
 export default Register;
