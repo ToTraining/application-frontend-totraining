@@ -1,5 +1,4 @@
 import { createContext, ReactNode } from "react";
-
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../service/api";
@@ -21,6 +20,16 @@ interface IForm {
 
 interface RegisterProviderProps {
   children: ReactNode;
+}
+
+interface IForm {
+  name: string;
+  email: string;
+  cellphone: number;
+  age: number;
+  url: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export const RegisterContext = createContext<RegisterContextProps>(

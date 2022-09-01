@@ -1,16 +1,19 @@
-import { FieldValues } from "react-hook-form";
 import { createContext, ReactNode } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface LoginContextProps {
-  toLogin: (data: FieldValues) => void;
+  toLogin: Function;
   navigate: NavigateFunction;
 }
 
 interface LoginProviderProps {
   children: ReactNode;
+}
+interface IForm {
+  email: string;
+  password: string;
 }
 
 export const LoginContext = createContext<LoginContextProps>(
@@ -30,7 +33,9 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
     });
   const navigate = useNavigate();
 
-  const toLogin = (data: FieldValues) => {
+  const toLogin = (data: IForm) => {
+    console.log(data);
+
     api
       .post("/login", data)
       .then((response) => {
