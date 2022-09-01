@@ -7,6 +7,15 @@ import { Input } from "@nextui-org/react";
 import { useContext } from "react";
 import { RegisterContext } from "../../Context/RegisterContext";
 
+interface IForm {
+  name: string;
+  email: string;
+  cellphone: number;
+  age: number;
+  url: string;
+  password: string;
+  confirmPassword: string;
+}
 const Register = () => {
   const { navigate, toRegister } = useContext(RegisterContext);
 
@@ -40,7 +49,7 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(formSchema) });
+  } = useForm<IForm>({ resolver: yupResolver(formSchema) });
 
   return (
     <>
@@ -49,39 +58,43 @@ const Register = () => {
           <h1>Registro</h1>
         </div>
 
-        <form onSubmit={handleSubmit(toRegister)}>
+        <form
+          onSubmit={handleSubmit(async (data) => {
+            await toRegister(data);
+          })}
+        >
           <Input label="Nome" placeholder="Nome" {...register("name")} />
-          <span>{errors.name?.message as unknown as string}</span>
+          <span>{errors.name?.message}</span>
 
           <Input label="E-mail" placeholder="E-mail" {...register("email")} />
-          <span>{errors.email?.message as unknown as string}</span>
+          <span>{errors.email?.message}</span>
 
           <Input
             label="Telefone"
             placeholder="Telefone"
             {...register("cellphone")}
           />
-          <span>{errors.cellphone?.message as unknown as string}</span>
+          <span>{errors.cellphone?.message}</span>
 
           <Input label="Idade" placeholder="Idade" {...register("age")} />
-          <span>{errors.age?.message as unknown as string}</span>
+          <span>{errors.age?.message}</span>
 
           <Input label="URL" placeholder="URL" {...register("url")} />
-          <span>{errors.url?.message as unknown as string}</span>
+          <span>{errors.url?.message}</span>
 
           <Input.Password
             labelPlaceholder="Password"
             initialValue="nextui123"
             {...register("password")}
           />
-          <span>{errors.password?.message as unknown as string}</span>
+          <span>{errors.password?.message}</span>
 
           <Input
             label="Confirmação de senha"
             placeholder="Confirmação de senha"
             {...register("confirmPassword")}
           />
-          <span>{errors.confirmPassword?.message as unknown as string}</span>
+          <span>{errors.confirmPassword?.message}</span>
 
           <div>
             <button type="submit">Cadastrar</button>

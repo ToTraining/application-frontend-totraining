@@ -1,16 +1,25 @@
 import { createContext, ReactNode } from "react";
-import { FieldValues } from "react-hook-form";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface RegisterContextProps {
-  toRegister: (data: FieldValues) => void;
+  toRegister: Function;
   navigate: NavigateFunction;
 }
 
 interface RegisterProviderProps {
   children: ReactNode;
+}
+
+interface IForm {
+  name: string;
+  email: string;
+  cellphone: number;
+  age: number;
+  url: string;
+  password: string;
+  confirmPassword: string;
 }
 
 export const RegisterContext = createContext<RegisterContextProps>(
@@ -30,7 +39,7 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
     });
   const navigate = useNavigate();
 
-  const toRegister = (data: FieldValues) => {
+  const toRegister = (data: IForm) => {
     api
       .post("/register", data)
       .then((response) => {
