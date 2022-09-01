@@ -1,11 +1,27 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
 import * as React from "react";
-import { Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 import { useContext } from "react";
 import { RegisterContext } from "../../Context/RegisterContext";
+import {
+  ContainerRegister,
+  DivFormImg,
+  DivForm,
+  DivFormHeader,
+  DivFormTitulo,
+  DivFormInputs,
+} from "./styled";
+interface IForm {
+  name: string;
+  email: string;
+  cellphone: number;
+  age: number;
+  url: string;
+  password: string;
+  confirmPassword: string;
+}
 
 interface IForm {
   name: string;
@@ -53,11 +69,28 @@ const Register = () => {
 
   return (
     <>
-      <div>
-        <div>
-          <h1>Registro</h1>
-        </div>
-
+      <ContainerRegister>
+        <DivFormImg>
+          {/* div form imagem*/}
+          <img
+            src="https://saude.abril.com.br/wp-content/uploads/2019/11/atividade-fisica.png?quality=85&strip=info&resize=850,567"
+            alt="imagemLogin"
+          />
+        </DivFormImg>
+        <DivForm>
+          <form
+            onSubmit={handleSubmit(async (data) => {
+              await toRegister(data);
+            })}
+          >
+            <div>
+              <DivFormHeader>
+                <p>toTraining</p>
+              </DivFormHeader>
+              <DivFormInputs>
+                <DivFormTitulo>
+                  <h1>Registro</h1>
+                </DivFormTitulo>
         <form
           onSubmit={handleSubmit(async (data) => {
             await toRegister(data);
@@ -97,14 +130,19 @@ const Register = () => {
           />
           <span>{errors.confirmPassword?.message}</span>
 
-          <div>
-            <button type="submit">Cadastrar</button>
-            <button onClick={(event) => navigate("/login")}>
-              Já possui registro ? Faça o seu login.
-            </button>
-          </div>
-        </form>
-      </div>
+                <div>
+                  <Button color="gradient" auto type="submit">
+                    Cadastrar
+                  </Button>
+                  <Button size="xs" onClick={(event) => navigate("/login")}>
+                    Já possui registro ? Faça o seu login.
+                  </Button>
+                </div>
+              </DivFormInputs>
+            </div>
+          </form>
+        </DivForm>
+      </ContainerRegister>
     </>
   );
 };

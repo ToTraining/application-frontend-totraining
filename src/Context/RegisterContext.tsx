@@ -8,6 +8,16 @@ interface RegisterContextProps {
   navigate: NavigateFunction;
 }
 
+interface IForm {
+  name: string;
+  email: string;
+  cellphone: number;
+  age: number;
+  url: string;
+  password: string;
+  confirmPassword: string;
+}
+
 interface RegisterProviderProps {
   children: ReactNode;
 }
@@ -51,7 +61,7 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
 
         console.log(error);
       });
-  };
+}
   return (
     <RegisterContext.Provider value={{ toRegister, navigate }}>
       {children}
