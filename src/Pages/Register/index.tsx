@@ -26,7 +26,7 @@ const Register = () => {
       .string()
       .typeError("Telefone inválido")
       .matches(
-        /^([1-9]{2}) (?:[2-8]|9[1-9])[0-9]{3}-[0-9]{4}/,
+        /^([1-9]{2}) (?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
         "Telefone Inválido"
       )
       .min(8)
@@ -83,13 +83,14 @@ const Register = () => {
           <span>{errors.url?.message}</span>
 
           <Input.Password
-            labelPlaceholder="Password"
-            initialValue="nextui123"
+            label="Senha"
+            placeholder="Password"
+            initialValue=""
             {...register("password")}
           />
           <span>{errors.password?.message}</span>
 
-          <Input
+          <Input.Password
             label="Confirmação de senha"
             placeholder="Confirmação de senha"
             {...register("confirmPassword")}

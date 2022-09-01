@@ -48,8 +48,9 @@ const Login = () => {
             <p>{errors.email?.message}</p>
 
             <Input.Password
-              labelPlaceholder="Password"
-              initialValue="nextui123"
+              aria-label="Senha"
+              placeholder="Password"
+              initialValue=""
               {...register("password")}
             />
 
