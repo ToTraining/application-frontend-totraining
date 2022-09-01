@@ -5,8 +5,18 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface RegisterContextProps {
-  toRegister: (data: FieldValues) => void;
+  toRegister: Function;
   navigate: NavigateFunction;
+}
+
+interface IForm {
+  name: string;
+  email: string;
+  cellphone: number;
+  age: number;
+  url: string;
+  password: string;
+  confirmPassword: string;
 }
 
 interface RegisterProviderProps {
@@ -30,7 +40,7 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
     });
   const navigate = useNavigate();
 
-  const toRegister = (data: FieldValues) => {
+  const toRegister = (data: IForm) => {
     api
       .post("/register", data)
       .then((response) => {
@@ -42,7 +52,7 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
 
         console.log(error);
       });
-  };
+}
   return (
     <RegisterContext.Provider value={{ toRegister, navigate }}>
       {children}
