@@ -1,4 +1,4 @@
-import {useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -7,10 +7,8 @@ import { Input } from "@nextui-org/react";
 import { useContext } from "react";
 import { RegisterContext } from "../../Context/RegisterContext";
 
-
 const Register = () => {
-  const { navigate, registerUser } = useContext(RegisterContext);
-
+  const { navigate, toRegister } = useContext(RegisterContext);
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome Obrigatório"),
@@ -46,56 +44,55 @@ const Register = () => {
 
   return (
     <>
-    <div>
       <div>
-        <h1>Registro</h1>
-      </div>
-
-      <form onSubmit={handleSubmit(registerUser)}>
-        <Input label="Nome" placeholder="Nome" {...register("name")} />
-        <span>{errors.name?.message as unknown as string}</span>
-
-        <Input label="E-mail" placeholder="E-mail" {...register("email")} />
-        <span>{errors.email?.message as unknown as string}</span>
-
-        <Input
-          label="Telefone"
-          placeholder="Telefone"
-          {...register("cellphone")}
-        />
-        <span>{errors.cellphone?.message as unknown as string}</span>
-
-        <Input label="Idade" placeholder="Idade" {...register("age")} />
-        <span>{errors.age?.message as unknown as string}</span>
-
-        <Input label="URL" placeholder="URL" {...register("url")} />
-        <span>{errors.url?.message as unknown as string}</span>
-
-        <Input.Password
-          labelPlaceholder="Password"
-          initialValue="nextui123"
-          {...register("password")}
-        />
-        <span>{errors.password?.message as unknown as string}</span>
-
-        <Input
-          label="Confirmação de senha"
-          placeholder="Confirmação de senha"
-          {...register("confirmPassword")}
-        />
-        <span>{errors.confirmPassword?.message as unknown as string}</span>
-
         <div>
-          <button type="submit">Cadastrar</button>
-          <button onClick={(event) => navigate("/login")}>
-            Já possui registro ? Faça o seu login.
-            </button>
+          <h1>Registro</h1>
         </div>
-      </form>
-    </div>
+
+        <form onSubmit={handleSubmit(toRegister)}>
+          <Input label="Nome" placeholder="Nome" {...register("name")} />
+          <span>{errors.name?.message as unknown as string}</span>
+
+          <Input label="E-mail" placeholder="E-mail" {...register("email")} />
+          <span>{errors.email?.message as unknown as string}</span>
+
+          <Input
+            label="Telefone"
+            placeholder="Telefone"
+            {...register("cellphone")}
+          />
+          <span>{errors.cellphone?.message as unknown as string}</span>
+
+          <Input label="Idade" placeholder="Idade" {...register("age")} />
+          <span>{errors.age?.message as unknown as string}</span>
+
+          <Input label="URL" placeholder="URL" {...register("url")} />
+          <span>{errors.url?.message as unknown as string}</span>
+
+          <Input.Password
+            labelPlaceholder="Password"
+            initialValue="nextui123"
+            {...register("password")}
+          />
+          <span>{errors.password?.message as unknown as string}</span>
+
+          <Input
+            label="Confirmação de senha"
+            placeholder="Confirmação de senha"
+            {...register("confirmPassword")}
+          />
+          <span>{errors.confirmPassword?.message as unknown as string}</span>
+
+          <div>
+            <button type="submit">Cadastrar</button>
+            <button onClick={(event) => navigate("/login")}>
+              Já possui registro ? Faça o seu login.
+            </button>
+          </div>
+        </form>
+      </div>
     </>
-    )
-    }
-  
+  );
+};
 
 export default Register;
