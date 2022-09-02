@@ -42,7 +42,6 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         localStorage.setItem("userToken", response.data.accessToken);
         notiFy("Login efetuado com sucesso!");
         navigate("/dashboard");
-
         console.log(response);
       })
       .catch((err) => {

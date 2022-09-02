@@ -42,7 +42,7 @@ const Register = () => {
       .string()
       .typeError("Telefone inválido")
       .matches(
-        /^([1-9]{2}) (?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
+        /^([1-9]{2})(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
         "Telefone Inválido"
       )
       .min(8)
@@ -134,7 +134,7 @@ const Register = () => {
                   <Button color="gradient" auto type="submit">
                     Cadastrar
                   </Button>
-                  <Button size="xs" onClick={(event) => navigate("/login")}>
+                  <Button size="xs" onClick={(event) => navigate("/")}>
                     Já possui registro ? Faça o seu login.
                   </Button>
                 </div>

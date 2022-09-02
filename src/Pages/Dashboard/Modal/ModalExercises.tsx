@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Modal,
-  Button,
-  Text,
-  Input,
-
-} from "@nextui-org/react";
+import { Modal, Button, Text, Input } from "@nextui-org/react";
 import { DivModal, SelectDay, SelectExercises } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,7 +7,7 @@ import * as yup from "yup";
 
 export default function ModalExercises() {
   const [visible, setVisible] = React.useState(false);
-  const [exercise, setExercise] = useState([])
+  const [exercise, setExercise] = useState([]);
   const handler = () => setVisible(true);
 
   const closeHandler = () => {
@@ -31,16 +25,15 @@ export default function ModalExercises() {
   });
 
   const onSubmitModal = (data: any) => {
-
     const newExercise = {
       exercise: data.exercise,
       repetition: data.repetition,
       series: data.series,
       weight: data.weight,
       restTime: data.restTime,
-      day: data.day
-    }
-    console.log(newExercise)
+      day: data.day,
+    };
+    console.log(newExercise);
   };
 
   const { register, handleSubmit } = useForm({

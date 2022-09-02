@@ -8,10 +8,6 @@ body {
 
   width: 100%;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
 }
 
 code {
@@ -33,4 +29,4 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #45acfbb5;
   transition: 1s;
-  }
+}

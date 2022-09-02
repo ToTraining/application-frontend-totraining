@@ -4,6 +4,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import RegisterProvider from "../Context/RegisterContext";
 import LoginProvider from "../Context/LoginContext";
+import DashBProvider from "../Context/DashBContext";
 function RegisterComponent() {
   return (
     <RegisterProvider>
@@ -19,6 +20,13 @@ function LoginComponent() {
     </LoginProvider>
   );
 }
+function DashBComponent() {
+  return (
+    <DashBProvider>
+      <Dashboard />
+    </DashBProvider>
+  );
+}
 function MyRouter() {
   return (
     <Routes>
@@ -26,7 +34,7 @@ function MyRouter() {
 
       <Route path="/register" element={<RegisterComponent />} />
 
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard" element={<DashBComponent />} />
     </Routes>
   );
 }
