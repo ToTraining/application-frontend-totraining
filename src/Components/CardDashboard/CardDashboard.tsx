@@ -6,6 +6,7 @@ import { CardsContainer } from "./style";
 
 export default function CardDashboard() {
   const [exercises, setExercises] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   return (
     <CardsContainer>

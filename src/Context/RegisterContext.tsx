@@ -55,13 +55,14 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
       .then((response) => {
         console.log(response);
         notifyRegister("Cadastro efetuado com sucesso");
+        navigate("/");
       })
       .catch((error) => {
         notifyRegister("Cadastro não foi bem sucedido");
 
         console.log(error);
       });
-}
+  };
   return (
     <RegisterContext.Provider value={{ toRegister, navigate }}>
       {children}
