@@ -91,44 +91,44 @@ const Register = () => {
                 <DivFormTitulo>
                   <h1>Registro</h1>
                 </DivFormTitulo>
-        <form
-          onSubmit={handleSubmit(async (data) => {
-            await toRegister(data);
-          })}
-        >
-          <Input label="Nome" placeholder="Nome" {...register("name")} />
-          <span>{errors.name?.message}</span>
 
-          <Input label="E-mail" placeholder="E-mail" {...register("email")} />
-          <span>{errors.email?.message}</span>
+                <Input label="Nome" placeholder="Nome" {...register("name")} />
+                <span>{errors.name?.message}</span>
 
-          <Input
-            label="Telefone"
-            placeholder="Telefone"
-            {...register("cellphone")}
-          />
-          <span>{errors.cellphone?.message}</span>
+                <Input
+                  label="E-mail"
+                  placeholder="E-mail"
+                  {...register("email")}
+                />
+                <span>{errors.email?.message}</span>
 
-          <Input label="Idade" placeholder="Idade" {...register("age")} />
-          <span>{errors.age?.message}</span>
+                <Input
+                  label="Telefone"
+                  placeholder="Telefone"
+                  {...register("cellphone")}
+                />
+                <span>{errors.cellphone?.message}</span>
 
-          <Input label="URL" placeholder="URL" {...register("url")} />
-          <span>{errors.url?.message}</span>
+                <Input label="Idade" placeholder="Idade" {...register("age")} />
+                <span>{errors.age?.message}</span>
 
-          <Input.Password
-            label="Senha"
-            placeholder="Password"
-            initialValue=""
-            {...register("password")}
-          />
-          <span>{errors.password?.message}</span>
+                <Input label="URL" placeholder="URL" {...register("url")} />
+                <span>{errors.url?.message}</span>
 
-          <Input.Password
-            label="Confirmação de senha"
-            placeholder="Confirmação de senha"
-            {...register("confirmPassword")}
-          />
-          <span>{errors.confirmPassword?.message}</span>
+                <Input.Password
+                  label="Senha"
+                  placeholder="Password"
+                  initialValue=""
+                  {...register("password")}
+                />
+                <span>{errors.password?.message}</span>
+
+                <Input.Password
+                  label="Confirmação de senha"
+                  placeholder="Confirmação de senha"
+                  {...register("confirmPassword")}
+                />
+                <span>{errors.confirmPassword?.message}</span>
 
                 <div>
                   <Button color="gradient" auto type="submit">
