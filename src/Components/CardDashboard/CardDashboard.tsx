@@ -1,52 +1,54 @@
 import { Card, Text } from "@nextui-org/react";
-import { UlDashboard } from "./style";
-
-
+import axios from "axios";
+import { useState } from "react";
+import { api } from "../../service/api";
+import { CardExercises, CardsContainer } from "./style";
 
 export default function CardDashboard() {
+  const [exercises, setExercises] = useState([]);
+
   return (
-    <UlDashboard>
-      <Card className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Domingo</Text>
-        </Card.Body>
-      </Card>
+    <CardsContainer>
+      <CardExercises>
+        <h3>Domingo</h3>
+      </CardExercises>
 
-      <Card className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Segunda-feira</Text>
-        </Card.Body>
-      </Card>
+      <CardExercises>
+        <h3>Segunda-Feira</h3>
 
-      <Card className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Terça-feira</Text>
-        </Card.Body>
-      </Card>
+        {/* {exercises.map((exercise, index) => {
+        return (
+          <li>
+            <img src={exercise.img} alt="" />
+            <h3>{exercise.exercise}</h3>
+            <p>{exercise.repetition}</p>
+            <p>{exercise.series}</p>
+            <p>{exercise.weight}</p>
+            <p>{exercise.restTime}</p>
+          </li>
+        );
+      })}  */}
+      </CardExercises>
 
-      <Card className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Quarta-feira</Text>
-        </Card.Body>
-      </Card>
+      <CardExercises>
+        <h3>Terça-Feira</h3>
+      </CardExercises>
 
-      <Card  className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Quinta-feira</Text>
-        </Card.Body>
-      </Card>
+      <CardExercises>
+        <h3>Quarta-feira</h3>
+      </CardExercises>
 
-      <Card className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Sexta-feira</Text>
-        </Card.Body>
-      </Card>
+      <CardExercises>
+        <h3>Quinta-feira</h3>
+      </CardExercises>
 
-      <Card className="cardDashboard" isHoverable variant="bordered" >
-        <Card.Body>
-          <Text className="titleCards">Sábado</Text>
-        </Card.Body>
-      </Card>
-    </UlDashboard>
+      <CardExercises>
+        <h3>Sexta-feira</h3>
+      </CardExercises>
+
+      <CardExercises>
+        <h3>Sábado</h3>
+      </CardExercises>
+    </CardsContainer>
   );
 }
