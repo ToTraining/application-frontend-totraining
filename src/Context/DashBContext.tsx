@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../service/api";
@@ -32,6 +32,8 @@ export const DashBContext = createContext<DashBContextProps>(
 
 const DashBProvider = ({ children }: DashBProviderProps) => {
   const [userData, setUserData] = useState<IUserData>();
+  const userToken = localStorage.getItem("userToken")!;
+  const userId = localStorage.getItem("userId")!;
   const notiFy = (message: string) =>
     toast(message, {
       position: "top-right",
@@ -43,23 +45,27 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       progress: undefined,
     });
   const navigate = useNavigate();
+  const getUserData = (id: string) => {
+    if (userToken) {
+      api
+        .get("/users/" + id)
+        .then((response) => {
+          setUserData(response.data);
 
-  /// Requisição da Api
-  const getUserData = (id: number) => {
-    api
-      .get("/users/" + id)
-      .then((response) => {
-        setUserData(response.data);
-        localStorage.setItem("userId", response.data.user.id);
-        notiFy("Login efetuado com sucesso!");
-        navigate("/dashboard");
-        console.log(response);
-      })
-      .catch((err) => {
-        notiFy("O login não foi bem sucedido!");
-        console.log(err);
-      });
+          navigate("/dashboard");
+          console.log(response);
+        })
+        .catch((err) => {
+          localStorage.clear();
+        });
+    } else {
+      navigate("/");
+    }
   };
+  /// Requisição da Api
+  useEffect(() => {
+    getUserData(userId);
+  }, []);
 
   return (
     <DashBContext.Provider value={{ getUserData, userData }}>

@@ -40,6 +40,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
       .post("/login", data)
       .then((response) => {
         localStorage.setItem("userToken", response.data.accessToken);
+        localStorage.setItem("userId", response.data.user.id);
         notiFy("Login efetuado com sucesso!");
         navigate("/dashboard");
         console.log(response);
