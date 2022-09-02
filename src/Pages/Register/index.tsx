@@ -12,7 +12,10 @@ import {
   DivFormHeader,
   DivFormTitulo,
   DivFormInputs,
+  BtnDiv
 } from "./styled";
+import 'react-toastify/dist/ReactToastify.css';
+
 interface IForm {
   name: string;
   email: string;
@@ -41,10 +44,10 @@ const Register = () => {
     cellphone: yup
       .string()
       .typeError("Telefone inválido")
-      .matches(
-        /^([1-9]{2}) (?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
-        "Telefone Inválido"
-      )
+      // .matches(
+      //   /^([1-9]{2}) (?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
+      //   "Telefone Inválido"
+      // )
       .min(8)
       .required("Telefone obrigatório"),
     age: yup.string().required("Idade obrigatório"),
@@ -73,8 +76,8 @@ const Register = () => {
         <DivFormImg>
           {/* div form imagem*/}
           <img
-            src="https://saude.abril.com.br/wp-content/uploads/2019/11/atividade-fisica.png?quality=85&strip=info&resize=850,567"
-            alt="imagemLogin"
+            src= "../../assets/yogapractice-amico"
+            alt="imagemRegister"
           />
         </DivFormImg>
         <DivForm>
@@ -91,11 +94,7 @@ const Register = () => {
                 <DivFormTitulo>
                   <h1>Registro</h1>
                 </DivFormTitulo>
-        <form
-          onSubmit={handleSubmit(async (data) => {
-            await toRegister(data);
-          })}
-        >
+       
           <Input label="Nome" placeholder="Nome" {...register("name")} />
           <span>{errors.name?.message}</span>
 
@@ -115,7 +114,7 @@ const Register = () => {
           <Input label="URL" placeholder="URL" {...register("url")} />
           <span>{errors.url?.message}</span>
 
-          <Input.Password
+          <Input.Password css={{width:"70%"}}
             label="Senha"
             placeholder="Password"
             initialValue=""
@@ -124,20 +123,21 @@ const Register = () => {
           <span>{errors.password?.message}</span>
 
           <Input.Password
+          css={{width:"70%"}}
             label="Confirmação de senha"
             placeholder="Confirmação de senha"
             {...register("confirmPassword")}
           />
           <span>{errors.confirmPassword?.message}</span>
 
-                <div>
-                  <Button color="gradient" auto type="submit">
+                <BtnDiv>
+                  <Button css={{width:"70%"}} color="gradient" auto type="submit">
                     Cadastrar
                   </Button>
-                  <Button size="xs" onClick={(event) => navigate("/login")}>
+                  <Button css={{background: "#7cacff8a", height:"1.5rem", color:" #ffffff94"}}  onClick={(event) => navigate("/login")}>
                     Já possui registro ? Faça o seu login.
                   </Button>
-                </div>
+                </BtnDiv>
               </DivFormInputs>
             </div>
           </form>

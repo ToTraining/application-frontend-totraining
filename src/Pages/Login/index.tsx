@@ -6,6 +6,8 @@ import { useContext } from "react";
 import { Input } from "@nextui-org/react";
 
 import { LoginContext } from "../../Context/LoginContext";
+import 'react-toastify/dist/ReactToastify.css';
+
 interface IForm {
   email: string;
   password: string;
