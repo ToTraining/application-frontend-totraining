@@ -2,18 +2,18 @@ import { Card, Text } from "@nextui-org/react";
 import axios from "axios";
 import { useState } from "react";
 import { api } from "../../service/api";
-import { CardExercises, CardsContainer } from "./style";
+import { CardsContainer } from "./style";
 
 export default function CardDashboard() {
   const [exercises, setExercises] = useState([]);
 
   return (
     <CardsContainer>
-      <CardExercises>
+      <ul>
         <h3>Domingo</h3>
-      </CardExercises>
+      </ul>
 
-      <CardExercises>
+      <ul>
         <h3>Segunda-Feira</h3>
 
         {/* {exercises.map((exercise, index) => {
@@ -28,27 +28,27 @@ export default function CardDashboard() {
           </li>
         );
       })}  */}
-      </CardExercises>
+      </ul>
 
-      <CardExercises>
+      <ul>
         <h3>Terça-Feira</h3>
-      </CardExercises>
+      </ul>
 
-      <CardExercises>
+      <ul>
         <h3>Quarta-feira</h3>
-      </CardExercises>
+      </ul>
 
-      <CardExercises>
+      <ul>
         <h3>Quinta-feira</h3>
-      </CardExercises>
+      </ul>
 
-      <CardExercises>
+      <ul>
         <h3>Sexta-feira</h3>
-      </CardExercises>
+      </ul>
 
-      <CardExercises>
+      <ul>
         <h3>Sábado</h3>
-      </CardExercises>
+      </ul>
     </CardsContainer>
   );
 }

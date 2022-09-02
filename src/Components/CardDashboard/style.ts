@@ -1,30 +1,25 @@
 import styled from "styled-components";
 
 export const CardsContainer = styled.div`
+  gap: 15px;
+  display: -webkit-box;
+  flex-direction: row;
+  overflow-x: scroll;
+  scrollbar-color: #0077b6;
 
-gap: 15px;
-display: -webkit-box;
-flex-direction: row;
-overflow-x: scroll;
-scrollbar-color: #0077B6;
-
-`
-
-export const CardExercises = styled.ul`
-
-display: flex;
-justify-content: center;
-height: 400px;
-width: 200px;
-background-color: #0077B6;
-border-radius: 8px;
-margin-bottom: 5px;
-color: white;
-
-`
+  ul {
+    display: flex;
+    justify-content: center;
+    height: 400px;
+    width: 200px;
+    background-color: #0077b6;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    color: white;
+  }
+`;
 
 // export const UlDashboard = styled.ul`
-
 
 // gap: 15px;
 // display: -webkit-box;
@@ -44,7 +39,7 @@ color: white;
 
 // .titleCards{
 //      display: flex;
-//     justify-content: center; 
+//     justify-content: center;
 //     color: white;
 // }
 
