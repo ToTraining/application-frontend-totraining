@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../service/api";
@@ -6,10 +6,14 @@ import { api } from "../service/api";
 interface LoginContextProps {
   toLogin: Function;
   navigate: NavigateFunction;
+  user:IForm
+  loading: boolean;
+
 }
 
 interface LoginProviderProps {
   children: ReactNode;
+
 }
 interface IForm {
   email: string;
@@ -21,6 +25,9 @@ export const LoginContext = createContext<LoginContextProps>(
 );
 
 const LoginProvider = ({ children }: LoginProviderProps) => {
+  const [user, setUser] = useState<IForm>({} as IForm);
+  const [loading, setLoading] = useState(true);
+
   const notiFy = (message: string) =>
     toast(message, {
       position: "top-right",
@@ -49,12 +56,33 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         console.log(err);
       });
   };
+const token = localStorage.getItem("@context-Login:token");
+const id = localStorage.getItem("@context-Login:id");
 
+
+useEffect(() => {
+async function autoLogin() {
+  if (token) {
+    try {
+
+      const { data } = await api.get(`/users/${id}`);
+      setUser(data);
+      
+    } catch (error) {
+      localStorage.clear();
+    }
+  }
+  setLoading(false);
+}
+    autoLogin()
+  },[])
+    
   return (
-    <LoginContext.Provider value={{ toLogin, navigate }}>
+    <LoginContext.Provider value={{ toLogin, navigate, user, loading }}>
       {children}
     </LoginContext.Provider>
   );
-};
+  }
+
 
 export default LoginProvider;

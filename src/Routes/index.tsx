@@ -1,10 +1,11 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "../Pages/Dashboard";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import RegisterProvider from "../Context/RegisterContext";
-import LoginProvider from "../Context/LoginContext";
+import LoginProvider from "../Context/LoginContext"
 import DashBProvider from "../Context/DashBContext";
+import ProtectedRoutes from "../Components/ProtectRoutes";
 function RegisterComponent() {
   return (
     <RegisterProvider>
@@ -34,7 +35,13 @@ function MyRouter() {
 
       <Route path="/register" element={<RegisterComponent />} />
 
+      <Route element={<ProtectedRoutes/>}>
       <Route path="/dashboard" element={<DashBComponent />} />
+
+       </Route> 
+
+      <Route path='*' element={<Navigate replace to='/login'/>} />  {/*Caso o usuário digite uma rota que não exista, ele será redirecionado para a página de login */}
+
     </Routes>
   );
 }

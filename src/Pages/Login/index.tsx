@@ -7,7 +7,7 @@ import { Input } from "@nextui-org/react";
 import loginImg from "../../assets/loginImg.png";
 
 import { LoginContext } from "../../Context/LoginContext";
-interface IForm {
+export interface IForm {
   email: string;
   password: string;
 }
