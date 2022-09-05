@@ -32,11 +32,7 @@ const Login = () => {
         <img src={loginImg} alt="imagemLogin" />
 
         <div>
-          <form
-            onSubmit={handleSubmit(async (data) => {
-              await toLogin(data);
-            })}
-          >
+          <form onSubmit={handleSubmit(toLogin)}>
             <h3>Login</h3>
             <Input
               aria-label="E-mail"

@@ -5,6 +5,7 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #edfafd;
 
   header {
     width: 100%;
@@ -17,15 +18,15 @@ export const Body = styled.div`
     padding-bottom: 5px;
 
     border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
-    margin-bottom: 80px;
+    margin-bottom: 5px;
   }
   header img {
-    margin-left: 5em;
+    margin-left: 1em;
     width: 60px;
     height: 50px;
   }
   header figure {
-    background-color: red;
+    background-color: grey;
     border-radius: 50px;
     border: solid black;
 
@@ -35,7 +36,8 @@ export const Body = styled.div`
     width: 70px;
     height: 70px;
 
-    margin-right: 5em;
+    margin-right: 1em;
+    cursor: pointer;
   }
 
   header figure img {
@@ -43,16 +45,27 @@ export const Body = styled.div`
     margin: 0;
     width: auto;
     height: auto;
+    cursor: pointer;
   }
 
   main {
-    width: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 500px) {
+    header figure {
+      margin-right: 3em;
+    }
+    header img {
+      margin-left: 4em;
+    }
   }
 `;
 
 export const MainHeader = styled.div`
   width: 100%;
-  background-color: rgb(20, 20, 20);
 
   display: flex;
   justify-content: space-between;
@@ -63,8 +76,20 @@ export const MainHeader = styled.div`
   border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
 
   h2 {
-    font-size: 32px;
-    color: white;
+    font-size: 1rem;
+    color: black;
+    font-weight: boldw;
+    margin-left: 1rem;
+    margin-bottom: 0;
+  }
+  @media (min-width: 500px) {
+    h2 {
+      font-size: 1rem;
+      color: black;
+      font-weight: boldw;
+      margin-left: 4rem;
+      margin-bottom: 0;
+    }
   }
 `;
 

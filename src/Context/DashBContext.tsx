@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface DashBContextProps {
-  getUserData: Function;
+  getUserData: (data: "Tipagem") => void;
   userData: IUserData | undefined;
   modifyUser: Function;
   deleteUser: Function;
@@ -20,14 +20,14 @@ interface DashBProviderProps {
 interface IUserData {
   acessToken: string;
   user: {
-    email: "uzumaki@mail.com";
-    password: "$2a$10$bZY2KGwiTIpaRXneTdY57.9USquQpaJ6kGoZhk0PIXfL1kUnhB3Z.";
-    name: "Naruto Uzumaki";
-    cellphone: "74 998741477";
-    age: "41";
-    url: "https://static.wikia.nocookie.net/naruto/images/3/33/Naruto_Uzumaki_%28Parte_I_-_HD%29.png/revision/latest?cb=20160316113315&path-prefix=pt-br";
-    confirmPassword: "Senha123@";
-    id: 4;
+    name: string;
+    email: string;
+    password: string;
+    cellphone: number;
+    age: number;
+    url: string;
+    confirmPassword: string;
+    id: number;
   };
 }
 interface IExercise {

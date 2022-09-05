@@ -6,7 +6,8 @@ export const CardsContainer = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   scrollbar-color: #0077b6;
-
+  width: 90%;
+  margin: 0;
   ul {
     display: flex;
     justify-content: center;
@@ -16,6 +17,7 @@ export const CardsContainer = styled.div`
     border-radius: 8px;
     margin-bottom: 5px;
     color: white;
+    box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   }
 `;
 

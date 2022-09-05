@@ -1,7 +1,7 @@
 import { Card, Text } from "@nextui-org/react";
 import axios from "axios";
 import { useState } from "react";
-import { api } from "../../service/api";
+import { api } from "../../../../service/api";
 import { CardsContainer } from "./style";
 
 export default function CardDashboard() {

@@ -1,8 +1,11 @@
 .App {
+  width: 100vw;
+  height: 100vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #edfafd;
 }
-
 
 .App-header {
   background-color: #282c34;
@@ -14,5 +17,3 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-

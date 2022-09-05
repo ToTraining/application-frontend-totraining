@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
-import { DivModal, SelectDay, SelectExercises } from "./style";
+
+import { AddExerciseBtn, DivModal, SelectDay, SelectExercises } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -42,9 +43,9 @@ export default function ModalExercises() {
 
   return (
     <div>
-      <Button auto shadow onClick={handler}>
+      <AddExerciseBtn size={"xs"} onClick={handler}>
         Adicionar Exercício +
-      </Button>
+      </AddExerciseBtn>
 
       <Modal
         css={{ backgroundColor: "#00224e" }}
@@ -136,7 +137,7 @@ export default function ModalExercises() {
                 <option value="Sábado">Sábado</option>
               </SelectDay>
 
-              <Button color="gradient" type="submit" auto>
+              <Button type="submit" auto>
                 Adicionar a lista
               </Button>
             </DivModal>
