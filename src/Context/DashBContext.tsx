@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { number } from "yup";
 import { api } from "../service/api";
 
 interface DashBContextProps {
@@ -20,9 +21,10 @@ interface DashBProviderProps {
 interface IUserData {
   acessToken: string;
   user: {
-    name: string;
+
     email: string;
     password: string;
+    name: string;
     cellphone: number;
     age: number;
     url: string;
@@ -30,18 +32,19 @@ interface IUserData {
     id: number;
   };
 }
+
 interface IExercise {
   name: string;
   rep: string;
   day: string;
-  userId?: string;
+  userId?: number;
 }
 
 interface IExerciseModify {
   name?: string;
   rep?: string;
   day?: string;
-  userId: string;
+  userId: number;
 }
 
 export const DashBContext = createContext<DashBContextProps>(
@@ -51,7 +54,7 @@ export const DashBContext = createContext<DashBContextProps>(
 const DashBProvider = ({ children }: DashBProviderProps) => {
   const [userData, setUserData] = useState<IUserData>();
   const userToken = localStorage.getItem("userToken")!;
-  const id = localStorage.getItem("userId")!;
+  const id = Number(localStorage.getItem("userId"))!;
 
   const [workouts, setWorkouts] = useState<IExercise[]>([]);
 
@@ -89,7 +92,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
     });
   };
 
-  const getWorkouts = (id: string) => {
+  const getWorkouts = (id: number) => {
     api
       .get(`/users/${id}?_embed=workouts`)
       .then((resp) => {
