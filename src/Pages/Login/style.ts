@@ -1,27 +1,31 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Main = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
 
-display: flex;
-
-div{
+  div {
     display: flex;
     align-items: center;
-}
+  }
 
-.loginForm{
+  .loginForm {
     display: flex;
     flex-direction: column;
 
-    background-color: #0077B6;
+    background-color: #0077b6;
     border: 2px solid black;
     padding: 20px;
-}
+  }
 
-.btnLogin{
+  .btnLogin {
     margin-bottom: 20px;
     padding: 7px;
     background-color: #fff;
-}
-
-`
+  }
+`;

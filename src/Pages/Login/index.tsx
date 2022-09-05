@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { Input } from "@nextui-org/react";
+import loginImg from "../../assets/loginImg.png";
 
 import { LoginContext } from "../../Context/LoginContext";
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,10 +15,6 @@ interface IForm {
 }
 const Login = () => {
   const { navigate, toLogin } = useContext(LoginContext);
-  // interface ILoginData {
-  //   email: string;
-  //   password: string;
-  // A princípio não tem utilidade.}
 
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatórios").email("E-mail Inválido"),
@@ -34,19 +31,16 @@ const Login = () => {
   return (
     <>
       <Main>
-        <img
-          src="https://saude.abril.com.br/wp-content/uploads/2019/11/atividade-fisica.png?quality=85&strip=info&resize=850,567"
-          alt="imagemLogin"
-        />
+        <img src={loginImg} alt="imagemLogin" />
 
         <div>
-          <form
-            onSubmit={handleSubmit(async (data) => {
-              await toLogin(data);
-            })}
-          >
+          <form onSubmit={handleSubmit(toLogin)}>
             <h3>Login</h3>
-            <Input placeholder="E-mail" {...register("email")} />
+            <Input
+              aria-label="E-mail"
+              placeholder="E-mail"
+              {...register("email")}
+            />
             <p>{errors.email?.message}</p>
 
             <Input.Password

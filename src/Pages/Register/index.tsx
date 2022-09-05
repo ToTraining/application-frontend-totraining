@@ -12,7 +12,8 @@ import {
   DivFormHeader,
   DivFormTitulo,
   DivFormInputs,
-  BtnDiv
+  BtnDiv,
+  InputRegister,
 } from "./styled";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -81,11 +82,7 @@ const Register = () => {
           />
         </DivFormImg>
         <DivForm>
-          <form
-            onSubmit={handleSubmit(async (data) => {
-              await toRegister(data);
-            })}
-          >
+          <form onSubmit={handleSubmit(toRegister)}>
             <div>
               <DivFormHeader>
                 <p>toTraining</p>
@@ -94,27 +91,32 @@ const Register = () => {
                 <DivFormTitulo>
                   <h1>Registro</h1>
                 </DivFormTitulo>
+
        
           <Input label="Nome" placeholder="Nome" {...register("name")} />
           <span>{errors.name?.message}</span>
 
-          <Input label="E-mail" placeholder="E-mail" {...register("email")} />
-          <span>{errors.email?.message}</span>
+                <Input
+                  label="E-mail"
+                  placeholder="E-mail"
+                  {...register("email")}
+                />
+                <span>{errors.email?.message}</span>
 
-          <Input
-            label="Telefone"
-            placeholder="Telefone"
-            {...register("cellphone")}
-          />
-          <span>{errors.cellphone?.message}</span>
+                <Input
+                  label="Telefone"
+                  placeholder="Telefone"
+                  {...register("cellphone")}
+                />
+                <span>{errors.cellphone?.message}</span>
 
-          <Input label="Idade" placeholder="Idade" {...register("age")} />
-          <span>{errors.age?.message}</span>
+                <Input label="Idade" placeholder="Idade" {...register("age")} />
+                <span>{errors.age?.message}</span>
 
-          <Input label="URL" placeholder="URL" {...register("url")} />
-          <span>{errors.url?.message}</span>
+                <Input label="URL" placeholder="URL" {...register("url")} />
+                <span>{errors.url?.message}</span>
 
-          <Input.Password css={{width:"70%"}}
+                 <Input.Password css={{width:"70%"}}
             label="Senha"
             placeholder="Password"
             initialValue=""
@@ -130,11 +132,14 @@ const Register = () => {
           />
           <span>{errors.confirmPassword?.message}</span>
 
+
                 <BtnDiv>
                   <Button css={{width:"70%"}} color="gradient" auto type="submit">
                     Cadastrar
                   </Button>
-                  <Button css={{background: "#7cacff8a", height:"1.5rem", color:" #ffffff94"}}  onClick={(event) => navigate("/login")}>
+
+                  <Button css={{background: "#7cacff8a", height:"1.5rem", color:" #ffffff94"}}  onClick={(event) => navigate("/")}>
+
                     Já possui registro ? Faça o seu login.
                   </Button>
                 </BtnDiv>
