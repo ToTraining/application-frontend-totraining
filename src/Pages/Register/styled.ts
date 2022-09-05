@@ -42,7 +42,7 @@ export const DivForm = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 5rem;
+  padding: 0;
 
   @media screen and (max-width: 700px) {
     width: 100%;
@@ -68,3 +68,10 @@ export const DivFormInputs = styled.div`
   align-items: center;
   background: #0077b6;
 `;
+export const BtnDiv=styled.div` 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+`

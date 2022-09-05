@@ -7,6 +7,8 @@ import { Input } from "@nextui-org/react";
 import loginImg from "../../assets/loginImg.png";
 
 import { LoginContext } from "../../Context/LoginContext";
+import 'react-toastify/dist/ReactToastify.css';
+
 interface IForm {
   email: string;
   password: string;
