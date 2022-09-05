@@ -5,7 +5,7 @@ import { number } from "yup";
 import { api } from "../service/api";
 
 interface DashBContextProps {
-  getUserData: Function;
+  getUserData: (data: "Tipagem") => void;
   userData: IUserData | undefined;
   modifyUser: Function;
   deleteUser: Function;
@@ -21,6 +21,7 @@ interface DashBProviderProps {
 interface IUserData {
   acessToken: string;
   user: {
+
     email: string;
     password: string;
     name: string;

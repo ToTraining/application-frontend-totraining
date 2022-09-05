@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface RegisterContextProps {
-  toRegister: Function;
+  toRegister: (data: IForm) => void;
   navigate: NavigateFunction;
 }
 

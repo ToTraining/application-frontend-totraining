@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface LoginContextProps {
-  toLogin: Function;
+  toLogin: (data: IForm) => void;
   navigate: NavigateFunction;
 }
 

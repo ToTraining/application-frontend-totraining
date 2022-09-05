@@ -1,4 +1,9 @@
+import { Input } from "@nextui-org/react";
 import styled from "styled-components";
+
+export const InputRegister = styled(Input)`
+  border: 5px solid red;
+`;
 
 export const ContainerRegister = styled.div`
   background-color: white;

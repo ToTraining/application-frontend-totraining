@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import CardDashboard from "../../Components/CardDashboard/CardDashboard";
-import ModalExercises from "../Dashboard/Modal/ModalExercises";
+import CardDashboard from "./Components/CardDashboardComponent/CardDashboard";
+import ModalExercises from "./Components/ModalComponent/ModalExercises";
 import { Body, MainHeader } from "./style";
 import logo from "../../assets/logo.png";
 import { DashBContext } from "../../Context/DashBContext";

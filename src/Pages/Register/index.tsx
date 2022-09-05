@@ -12,6 +12,7 @@ import {
   DivFormHeader,
   DivFormTitulo,
   DivFormInputs,
+  InputRegister,
 } from "./styled";
 interface IForm {
   name: string;
@@ -78,11 +79,7 @@ const Register = () => {
           />
         </DivFormImg>
         <DivForm>
-          <form
-            onSubmit={handleSubmit(async (data) => {
-              await toRegister(data);
-            })}
-          >
+          <form onSubmit={handleSubmit(toRegister)}>
             <div>
               <DivFormHeader>
                 <p>toTraining</p>
@@ -92,7 +89,11 @@ const Register = () => {
                   <h1>Registro</h1>
                 </DivFormTitulo>
 
-                <Input label="Nome" placeholder="Nome" {...register("name")} />
+                <InputRegister
+                  label="Nome"
+                  placeholder="Nome"
+                  {...register("name")}
+                />
                 <span>{errors.name?.message}</span>
 
                 <Input
