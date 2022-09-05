@@ -1,8 +1,10 @@
 .App {
   display: flex;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
 }
-
 
 .App-header {
   background-color: #282c34;
@@ -14,5 +16,3 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-

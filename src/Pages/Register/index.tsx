@@ -11,10 +11,15 @@ import {
   DivForm,
   DivFormHeader,
   DivFormTitulo,
-  DivFormInputs,
-  BtnDiv
+  BtnDiv,
+  DivMain,
+  Main,
+  BtnCadastrar
 } from "./styled";
-import 'react-toastify/dist/ReactToastify.css';
+import Yoga from "../../assets/yoga.png"
+
+import "react-toastify/dist/ReactToastify.css";
+
 
 interface IForm {
   name: string;
@@ -72,77 +77,92 @@ const Register = () => {
 
   return (
     <>
-      <ContainerRegister>
+          <DivFormHeader>
+            <p>toTraining</p>
+          </DivFormHeader>
+    <Main>
         <DivFormImg>
           {/* div form imagem*/}
-          <img
-            src= "../../assets/yogapractice-amico"
-            alt="imagemRegister"
-          />
+          <img src= {Yoga} alt="imagemRegister" />
         </DivFormImg>
+      <ContainerRegister>
         <DivForm>
           <form
             onSubmit={handleSubmit(async (data) => {
               await toRegister(data);
             })}
           >
-            <div>
-              <DivFormHeader>
-                <p>toTraining</p>
-              </DivFormHeader>
-              <DivFormInputs>
+            <DivMain>
+              
                 <DivFormTitulo>
                   <h1>Registro</h1>
                 </DivFormTitulo>
-       
-          <Input label="Nome" placeholder="Nome" {...register("name")} />
-          <span>{errors.name?.message}</span>
 
-          <Input label="E-mail" placeholder="E-mail" {...register("email")} />
-          <span>{errors.email?.message}</span>
+                <Input css={{ width: "32vh"}} label="" placeholder="Nome" {...register("name")} />
+                <span>{errors.name?.message}</span>
 
-          <Input
-            label="Telefone"
-            placeholder="Telefone"
-            {...register("cellphone")}
-          />
-          <span>{errors.cellphone?.message}</span>
+                <Input css={{ width: "32vh"}} label="" placeholder="E-mail" {...register("email")} />
+                <span>{errors.email?.message}</span>
 
-          <Input label="Idade" placeholder="Idade" {...register("age")} />
-          <span>{errors.age?.message}</span>
+                <Input
+                css={{ width: "32vh"}}
+                  label=""
+                  placeholder="Telefone"
+                  {...register("cellphone")}
+                />
+                <span>{errors.cellphone?.message}</span>
 
-          <Input label="URL" placeholder="URL" {...register("url")} />
-          <span>{errors.url?.message}</span>
+                <Input css={{ width: "32vh"}} label="" placeholder="Idade" {...register("age")} />
+                <span>{errors.age?.message}</span>
 
-          <Input.Password css={{width:"70%"}}
-            label="Senha"
-            placeholder="Password"
-            initialValue=""
-            {...register("password")}
-          />
-          <span>{errors.password?.message}</span>
+                <Input css={{ width: "32vh"}} label="" placeholder="URL" {...register("url")} />
+                <span>{errors.url?.message}</span>
 
-          <Input.Password
-          css={{width:"70%"}}
-            label="Confirmação de senha"
-            placeholder="Confirmação de senha"
-            {...register("confirmPassword")}
-          />
-          <span>{errors.confirmPassword?.message}</span>
+                <Input.Password
+                  css={{ width: "32vh"}}
+                  label=""
+                  placeholder="Password"
+                  initialValue=""
+                  {...register("password")}
+                />
+                <span>{errors.password?.message}</span>
+
+                <Input.Password
+                 css={{ width: "32vh"}}
+                  label=""
+                  placeholder="Confirmação de senha"
+                  {...register("confirmPassword")}
+                />
+                <span>{errors.confirmPassword?.message}</span>
 
                 <BtnDiv>
-                  <Button css={{width:"70%"}} color="gradient" auto type="submit">
+                  <BtnCadastrar  
+                    css={{ width: "70%" }}
+                    
+                    auto
+                    type="submit"
+                  >
                     Cadastrar
-                  </Button>
-                  <Button css={{background: "#7cacff8a", height:"1.5rem", color:" #ffffff94"}}  onClick={(event) => navigate("/login")}>
+                  </BtnCadastrar>
+                  <hr />
+                  <Button
+                    css={{
+                      background: "transparent",
+                      height: "1.5rem",
+                      color: "white",
+                      
+                    }}
+                    onClick={(event) => navigate("/")}
+                  >
                     Já possui registro ? Faça o seu login.
                   </Button>
                 </BtnDiv>
-              </DivFormInputs>
-            </div>
+              
+            </DivMain>
           </form>
         </DivForm>
       </ContainerRegister>
+    </Main>
     </>
   );
 };
