@@ -48,25 +48,7 @@ export const Body = styled.div`
   main {
     width: 90%;
   }
-`;
-
-export const MainHeader = styled.div`
-  width: 100%;
-  background-color: rgb(20, 20, 20);
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 10px;
-
-  border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
-
-  h2 {
-    font-size: 32px;
-    color: white;
-  }
-`;
+`
 
 export const containerApp = styled.div`
   /* width: ; */

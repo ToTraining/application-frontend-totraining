@@ -32,7 +32,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
       progress: undefined,
     });
   const navigate = useNavigate();
-
+  
   const toLogin = (data: IForm) => {
     console.log(data);
 
