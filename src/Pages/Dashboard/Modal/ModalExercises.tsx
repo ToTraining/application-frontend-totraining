@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
-import { DivModal, SelectDay, SelectExercises } from "./style";
+import { DivModal, SelectDay } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { DashBContext } from "../../../Context/DashBContext";
 
 export default function ModalExercises() {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
   const [exercise, setExercise] = useState([]);
   const handler = () => setVisible(true);
+
+  const { addWorkout } = useContext(DashBContext);
 
   const closeHandler = () => {
     setVisible(false);
@@ -23,7 +26,7 @@ export default function ModalExercises() {
     // restTime: yup.number().required(),
     // day: yup.string().required(),
   });
-
+  /* 
   const onSubmitModal = (data: any) => {
     const newExercise = {
       exercise: data.exercise,
@@ -34,9 +37,22 @@ export default function ModalExercises() {
       day: data.day,
     };
     console.log(newExercise);
-  };
+  }; */
 
-  const { register, handleSubmit } = useForm({
+  interface IWorkout {
+    title: string;
+    rep: number;
+    time: number;
+    day: string;
+    weigth: number;
+    set: number;
+    id: number;
+    userId?: number;
+  }
+
+  type IWorkoutFunction = Omit<IWorkout, "">;
+
+  const { register, handleSubmit } = useForm<IWorkoutFunction>({
     resolver: yupResolver(schema),
   });
 
@@ -59,14 +75,7 @@ export default function ModalExercises() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmitModal)}>
-            <SelectExercises {...register("exercise")} id="modalExercises">
-              <option value="Flexão">Flexão</option>
-              <option value="Pular Corda">Pular Corda</option>
-              <option value="Agachamento">Agachamento</option>
-              <option value="Abdominal">Abdominal</option>
-            </SelectExercises>
-
+          <form onSubmit={handleSubmit(addWorkout)}>
             <DivModal>
               <Input
                 css={{
@@ -75,7 +84,20 @@ export default function ModalExercises() {
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
-                {...register("repetition")}
+                {...register("title")}
+                clearable
+                color="primary"
+                size="lg"
+                placeholder="Nome"
+              />
+              <Input
+                css={{
+                  backgroundColor: "#fff",
+                  width: "49%",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
+                {...register("rep")}
                 clearable
                 color="primary"
                 size="lg"
@@ -88,7 +110,7 @@ export default function ModalExercises() {
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
-                {...register("series")}
+                {...register("set")}
                 clearable
                 color="primary"
                 size="lg"
@@ -104,7 +126,7 @@ export default function ModalExercises() {
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
-                {...register("weight")}
+                {...register("weigth")}
                 clearable
                 color="primary"
                 size="lg"
@@ -117,7 +139,7 @@ export default function ModalExercises() {
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
-                {...register("restTime")}
+                {...register("time")}
                 clearable
                 color="primary"
                 size="lg"
@@ -127,13 +149,13 @@ export default function ModalExercises() {
 
             <DivModal>
               <SelectDay {...register("day")} id="modalDays">
-                <option value="Domingo">Domingo</option>
-                <option value="Segunda-feira">Segunda-feira</option>
-                <option value="Terça-feira">Terça-feira</option>
-                <option value="Quarta-feira">Quarta-feira</option>
-                <option value="Quinta-feira">Quinta-feira</option>
-                <option value="Sexta-feira">Sexta-feira</option>
-                <option value="Sábado">Sábado</option>
+                <option value="domingo">Domingo</option>
+                <option value="segunda">Segunda-feira</option>
+                <option value="terca">Terça-feira</option>
+                <option value="quarta">Quarta-feira</option>
+                <option value="quinta">Quinta-feira</option>
+                <option value="sexta">Sexta-feira</option>
+                <option value="sabado">Sábado</option>
               </SelectDay>
 
               <Button color="gradient" type="submit" auto>

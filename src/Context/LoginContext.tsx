@@ -32,10 +32,8 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
       progress: undefined,
     });
   const navigate = useNavigate();
-  
-  const toLogin = (data: IForm) => {
-    console.log(data);
 
+  const toLogin = (data: IForm) => {
     api
       .post("/login", data)
       .then((response) => {
@@ -43,7 +41,6 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         localStorage.setItem("userId", response.data.user.id);
         notiFy("Login efetuado com sucesso!");
         navigate("/dashboard");
-        console.log(response);
       })
       .catch((err) => {
         notiFy("O login não foi bem sucedido!");

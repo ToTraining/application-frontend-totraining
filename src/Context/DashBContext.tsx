@@ -4,15 +4,19 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface DashBContextProps {
-  getUserData: Function;
-  userData: IUserData | undefined;
-  domingo: IExercise[] | [];
-  segunda: IExercise[] | [];
-  terca: IExercise[] | [];
-  quarta: IExercise[] | [];
-  quinta: IExercise[] | [];
-  sexta: IExercise[] | [];
-  sabado: IExercise[] | [];
+  userData: IUser;
+  domingo: IWorkout[] | [];
+  segunda: IWorkout[] | [];
+  terca: IWorkout[] | [];
+  quarta: IWorkout[] | [];
+  quinta: IWorkout[] | [];
+  sexta: IWorkout[] | [];
+  sabado: IWorkout[] | [];
+  addWorkout: (data: IWorkout) => void;
+  modifyWorkout: (idWorkout: number, data: IExerciseModify) => void;
+  deleteWorkout: (idWorkout: number) => void;
+  modifyUser: () => void;
+  deleteUser: () => void;
 }
 
 interface DashBProviderProps {
@@ -21,51 +25,60 @@ interface DashBProviderProps {
 
 interface IUserData {
   acessToken: string;
-  user: {
-    email: "uzumaki@mail.com";
-    password: "$2a$10$bZY2KGwiTIpaRXneTdY57.9USquQpaJ6kGoZhk0PIXfL1kUnhB3Z.";
-    name: "Naruto Uzumaki";
-    cellphone: "74 998741477";
-    age: "41";
-    url: "https://static.wikia.nocookie.net/naruto/images/3/33/Naruto_Uzumaki_%28Parte_I_-_HD%29.png/revision/latest?cb=20160316113315&path-prefix=pt-br";
-    confirmPassword: "Senha123@";
-    id: 4;
-  };
+  user: IUser;
+}
+
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  cellphone: string;
+  age: number;
+  url: string;
+  confirmPassword: string;
+  id: number;
 }
 
 export const DashBContext = createContext<DashBContextProps>(
   {} as DashBContextProps
 );
 
-interface IExercise {
-  name: string;
-  rep: string;
+interface IWorkout {
+  title: string;
+  rep: number;
+  time: number;
   day: string;
-  userId?: string;
+  weigth: number;
+  set: number;
+  id: number;
+  userId?: number;
 }
 
 interface IExerciseModify {
-  name?: string;
-  rep?: string;
+  title?: string;
+  rep?: number;
+  time?: number;
   day?: string;
-  userId: string;
+  weigth?: number;
+  set?: number;
+  id?: number;
+  userId: number;
 }
 
 const DashBProvider = ({ children }: DashBProviderProps) => {
-  const [userData, setUserData] = useState<IUserData>();
+  const [userData, setUserData] = useState<IUser>({} as IUser);
   const userToken = localStorage.getItem("userToken");
-  const id = localStorage.getItem("userId");
+  const id = Number(localStorage.getItem("userId"));
 
-  //atualizações para funcionalidades da api
-  const [workouts, setWorkouts] = useState<IExercise[]>([]);
+  const [workouts, setWorkouts] = useState<IWorkout[]>([]);
 
-  const [domingo, setDomingo] = useState<IExercise[]>([]);
-  const [segunda, setSegunda] = useState<IExercise[]>([]);
-  const [terca, setTerca] = useState<IExercise[]>([]);
-  const [quarta, setQuarta] = useState<IExercise[]>([]);
-  const [quinta, setQuinta] = useState<IExercise[]>([]);
-  const [sexta, setSexta] = useState<IExercise[]>([]);
-  const [sabado, setSabado] = useState<IExercise[]>([]);
+  const [domingo, setDomingo] = useState<IWorkout[]>([]);
+  const [segunda, setSegunda] = useState<IWorkout[]>([]);
+  const [terca, setTerca] = useState<IWorkout[]>([]);
+  const [quarta, setQuarta] = useState<IWorkout[]>([]);
+  const [quinta, setQuinta] = useState<IWorkout[]>([]);
+  const [sexta, setSexta] = useState<IWorkout[]>([]);
+  const [sabado, setSabado] = useState<IWorkout[]>([]);
 
   useEffect(() => {
     setDomingo(workouts.filter((elemento) => elemento.day === "domingo"));
@@ -88,50 +101,60 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       });
   };
 
-  const getWorkouts = (userId: number) => {
-    api
-      .get(`/users/${id}?_embed=workouts`)
-      .then((resp) => {
-        setWorkouts(resp.data.workouts);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  const deleteUser = () => {
+    api.delete(`/users/${id}`).catch((err) => {
+      console.error(err);
+    });
   };
 
-  useEffect(() => {
-    getWorkouts(id);
-  }, []);
+  async function getWorkouts() {
+    if (userToken) {
+      try {
+        api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        const { data } = await api.get(`/users/${id}?_embed=workouts`);
+        setWorkouts(data.workouts);
+        setUserData(data);
+      } catch (error) {
+        localStorage.clear();
+      }
+    } else {
+      navigate("/", { replace: true });
+    }
+  }
 
-  const addWorkout = (data: IExercise) => {
+  useEffect(() => {
+    getWorkouts();
+  }, [userToken]);
+
+  const addWorkout = (data: IWorkout) => {
     data.userId = id;
     api
       .post("/workouts", data)
       .then((resp) => {
-        getWorkouts(id);
+        getWorkouts();
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const modifyWorkout = (idWorkout: string, data: IExerciseModify) => {
+  const modifyWorkout = (idWorkout: number, data: IExerciseModify) => {
     data.userId = id;
     api
       .patch(`/workouts/${idWorkout}`, data)
       .then((resp) => {
-        getWorkouts(id);
+        getWorkouts();
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const deleteWorkout = (idWorkout: string) => {
+  const deleteWorkout = (idWorkout: number) => {
     /* const filtered = workouts.filter((toRemove) => toRemove.id !== idToRemove)*/
     api
       .delete(`/workouts/${idWorkout}`)
-      .then((resp) => getWorkouts(id))
+      .then((resp) => getWorkouts())
       .catch((err) => {
         console.error(err);
       });
@@ -150,31 +173,9 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
 
   const navigate = useNavigate();
 
-  const getUserData = (id: string) => {
-    if (userToken) {
-      api
-        .get("/users/" + id)
-        .then((response) => {
-          setUserData(response.data);
-          navigate("/dashboard");
-          console.log(response);
-        })
-        .catch((err) => {
-          localStorage.clear();
-        });
-    } else {
-      navigate("/");
-    }
-  };
-  /// Requisição da Api
-  useEffect(() => {
-    getUserData(id);
-  }, []);
-
   return (
     <DashBContext.Provider
       value={{
-        getUserData,
         userData,
         domingo,
         segunda,
@@ -183,6 +184,11 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
         quinta,
         sexta,
         sabado,
+        addWorkout,
+        modifyWorkout,
+        deleteWorkout,
+        modifyUser,
+        deleteUser,
       }}
     >
       {children}

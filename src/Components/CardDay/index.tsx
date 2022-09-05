@@ -1,21 +1,38 @@
-import { ReactNode } from "react";
 import { Exercise } from "../Exercise";
 
 interface ITitleCard {
   titulo: string;
-  workout: Iworkout;
+  workoutDay: IWorkout[] | [];
 }
 
-interface Iworkout {
+interface IWorkout {
   title: string;
   rep: number;
+  time: number;
+  day: string;
+  weigth: number;
+  set: number;
+  id: number;
 }
 
-export const CardDay = ({ titulo, workout }: ITitleCard) => {
+export const CardDay = ({ titulo, workoutDay }: ITitleCard) => {
   return (
     <ul>
       <h3>{titulo}</h3>
-      <Exercise workout={workout} />
+      {workoutDay.map((elemento) => {
+        return (
+          <Exercise
+            title={elemento.title}
+            rep={elemento.rep}
+            time={elemento.time}
+            day={elemento.day}
+            weigth={elemento.weigth}
+            set={elemento.set}
+            id={elemento.id}
+            key={elemento.id}
+          />
+        );
+      })}
     </ul>
   );
 };
