@@ -1,16 +1,16 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import MyRouter from './Routes';
-import { ToastContainer } from 'react-toastify';
-import { NextUIProvider } from '@nextui-org/react';
+import React from "react";
+import logo from "./logo.svg";
+
+import MyRouter from "./Routes";
+import { ToastContainer } from "react-toastify";
+import { NextUIProvider } from "@nextui-org/react";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <NextUIProvider>
-        <MyRouter/>
-        <ToastContainer/>
+        <MyRouter />
+        <ToastContainer />
       </NextUIProvider>
 
       {/* <Login/> */}

@@ -14,7 +14,7 @@ export const Main = styled.div`
     align-items: center;
   }
 
-  .loginForm {
+  form {
     display: flex;
     flex-direction: column;
 
@@ -23,7 +23,7 @@ export const Main = styled.div`
     padding: 20px;
   }
 
-  .btnLogin {
+  button {
     margin-bottom: 20px;
     padding: 7px;
     background-color: #fff;

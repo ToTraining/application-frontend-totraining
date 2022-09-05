@@ -6,14 +6,12 @@ import { api } from "../service/api";
 interface LoginContextProps {
   toLogin: Function;
   navigate: NavigateFunction;
-  user:IForm
+  user: IForm;
   loading: boolean;
-
 }
 
 interface LoginProviderProps {
   children: ReactNode;
-
 }
 interface IForm {
   email: string;
@@ -56,33 +54,31 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         console.log(err);
       });
   };
-const token = localStorage.getItem("@context-Login:token");
-const id = localStorage.getItem("@context-Login:id");
+  const token = localStorage.getItem("@context-Login:token");
+  const id = localStorage.getItem("@context-Login:id");
 
+  // useEffect(() => {
+  // async function autoLogin() {
+  //   if (token) {
+  //     try {
 
-useEffect(() => {
-async function autoLogin() {
-  if (token) {
-    try {
+  //       const { data } = await api.get(`/users/${id}`);
+  //       setUser(data);
 
-      const { data } = await api.get(`/users/${id}`);
-      setUser(data);
-      
-    } catch (error) {
-      localStorage.clear();
-    }
-  }
-  setLoading(false);
-}
-    autoLogin()
-  },[])
-    
+  //     } catch (error) {
+  //       localStorage.clear();
+  //     }
+  //   }
+  //   setLoading(false);
+  // }
+  //     autoLogin()
+  //   },[])
+
   return (
     <LoginContext.Provider value={{ toLogin, navigate, user, loading }}>
       {children}
     </LoginContext.Provider>
   );
-  }
-
+};
 
 export default LoginProvider;
