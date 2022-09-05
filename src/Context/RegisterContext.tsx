@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface RegisterContextProps {
-  toRegister: Function;
+  toRegister: (data: IForm) => void;
   navigate: NavigateFunction;
 }
 
@@ -55,13 +55,14 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
       .then((response) => {
         console.log(response);
         notifyRegister("Cadastro efetuado com sucesso");
+        navigate("/");
       })
       .catch((error) => {
         notifyRegister("Cadastro não foi bem sucedido");
 
         console.log(error);
       });
-}
+  };
   return (
     <RegisterContext.Provider value={{ toRegister, navigate }}>
       {children}

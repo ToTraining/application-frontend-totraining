@@ -135,6 +135,7 @@ const Register = () => {
                 />
                 <span>{errors.confirmPassword?.message}</span>
 
+
                 <BtnDiv>
                   <BtnCadastrar  
                     css={{ width: "70%" }}

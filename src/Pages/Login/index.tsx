@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
-import { Button, Input } from "@nextui-org/react";
+import { Input, Button } from "@nextui-org/react";
 
 import { LoginContext } from "../../Context/LoginContext";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,10 +25,6 @@ interface IForm {
 }
 const Login = () => {
   const { navigate, toLogin } = useContext(LoginContext);
-  // interface ILoginData {
-  //   email: string;
-  //   password: string;
-  // A princípio não tem utilidade.}
 
   const formSchema = yup.object().shape({
     email: yup.string().required("Email obrigatórios").email("E-mail Inválido"),

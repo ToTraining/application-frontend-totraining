@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface LoginContextProps {
-  toLogin: Function;
+  toLogin: (data: IForm) => void;
   navigate: NavigateFunction;
 }
 
@@ -40,9 +40,9 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
       .post("/login", data)
       .then((response) => {
         localStorage.setItem("userToken", response.data.accessToken);
+        localStorage.setItem("userId", response.data.user.id);
         notiFy("Login efetuado com sucesso!");
         navigate("/dashboard");
-
         console.log(response);
       })
       .catch((err) => {
