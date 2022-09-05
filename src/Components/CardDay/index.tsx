@@ -2,15 +2,20 @@ import { ReactNode } from "react";
 import { Exercise } from "../Exercise";
 
 interface ITitleCard {
-  children: ReactNode
+  titulo: string;
+  workout: Iworkout;
 }
 
-export const CardDay = ({children} : ITitleCard) => {
+interface Iworkout {
+  title: string;
+  rep: number;
+}
 
+export const CardDay = ({ titulo, workout }: ITitleCard) => {
   return (
-      <ul>
-        <p>{children}</p>
-        <Exercise/>
-      </ul>
+    <ul>
+      <h3>{titulo}</h3>
+      <Exercise workout={workout} />
+    </ul>
   );
-}
+};

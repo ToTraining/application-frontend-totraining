@@ -6,6 +6,13 @@ import { api } from "../service/api";
 interface DashBContextProps {
   getUserData: Function;
   userData: IUserData | undefined;
+  domingo: IExercise[] | [];
+  segunda: IExercise[] | [];
+  terca: IExercise[] | [];
+  quarta: IExercise[] | [];
+  quinta: IExercise[] | [];
+  sexta: IExercise[] | [];
+  sabado: IExercise[] | [];
 }
 
 interface DashBProviderProps {
@@ -46,8 +53,8 @@ interface IExerciseModify {
 
 const DashBProvider = ({ children }: DashBProviderProps) => {
   const [userData, setUserData] = useState<IUserData>();
-  const userToken = localStorage.getItem("userToken")!;
-  const id = localStorage.getItem("userId")!;
+  const userToken = localStorage.getItem("userToken");
+  const id = localStorage.getItem("userId");
 
   //atualizações para funcionalidades da api
   const [workouts, setWorkouts] = useState<IExercise[]>([]);
@@ -81,7 +88,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       });
   };
 
-  const getWorkouts = () => {
+  const getWorkouts = (userId: number) => {
     api
       .get(`/users/${id}?_embed=workouts`)
       .then((resp) => {
@@ -93,40 +100,42 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   };
 
   useEffect(() => {
-    getWorkouts();
+    getWorkouts(id);
   }, []);
 
   const addWorkout = (data: IExercise) => {
-    data.userId =  id; 
+    data.userId = id;
     api
       .post("/workouts", data)
       .then((resp) => {
-        getWorkouts();
+        getWorkouts(id);
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const modifyWorkout = (data: IExerciseModify) => {
+  const modifyWorkout = (idWorkout: string, data: IExerciseModify) => {
     data.userId = id;
     api
-     .patch(`/workouts/${idWorkout}`, data)
-     .then((resp) => {
-       getWorkouts();
-     })
-     .catch((err) => {
-       console.error(err);
-     });
- };
+      .patch(`/workouts/${idWorkout}`, data)
+      .then((resp) => {
+        getWorkouts(id);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
- const deleteWorkout = (idWorkout: string) => {
+  const deleteWorkout = (idWorkout: string) => {
     /* const filtered = workouts.filter((toRemove) => toRemove.id !== idToRemove)*/
     api
-    .delete(`/workouts/${idWorkout}`)
-    .then((resp) => getWorkouts())
-    .catch((err) => {console.error(err)});
-};
+      .delete(`/workouts/${idWorkout}`)
+      .then((resp) => getWorkouts(id))
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const notiFy = (message: string) =>
     toast(message, {
@@ -138,7 +147,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       draggable: true,
       progress: undefined,
     });
-    
+
   const navigate = useNavigate();
 
   const getUserData = (id: string) => {
@@ -163,7 +172,19 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   }, []);
 
   return (
-    <DashBContext.Provider value={{ getUserData, userData }}>
+    <DashBContext.Provider
+      value={{
+        getUserData,
+        userData,
+        domingo,
+        segunda,
+        terca,
+        quarta,
+        quinta,
+        sexta,
+        sabado,
+      }}
+    >
       {children}
     </DashBContext.Provider>
   );

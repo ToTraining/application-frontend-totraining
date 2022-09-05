@@ -27,38 +27,21 @@ const Dashboard = () => {
       <header>
         <img src={logo} alt="ToTraining" />
         <figure>
-          <img
-            src={""}
-            alt="Foto do usuário"
-          />
+          <img src={""} alt="Foto do usuário" />
         </figure>
       </header>
       <div>
-          <h2>{"userData.user.name"}</h2>
-          <ModalExercises />
+        <h2>{"userData.user.name"}</h2>
+        <ModalExercises />
       </div>
       <main>
-        <CardDay >
-          Domingo
-        </CardDay>
-        <CardDay >
-          Segunda
-        </CardDay>
-        <CardDay >
-          Terça
-        </CardDay>
-        <CardDay >
-          Quarta
-        </CardDay>
-        <CardDay >
-          Quinta
-        </CardDay>
-        <CardDay >
-          Sexta
-        </CardDay>
-        <CardDay >
-          Sábado
-        </CardDay>
+        <CardDay titulo="Domingo" workout={} />
+        <CardDay titulo="Segunda-feira" workout={} />
+        <CardDay titulo="Terça-feira" workout={} />
+        <CardDay titulo="Quarta-feira" workout={} />
+        <CardDay titulo="Quinta-feira" workout={} />
+        <CardDay titulo="Sexta-feira" workout={} />
+        <CardDay titulo="Sábado" workout={} />
       </main>
     </Body>
   );
