@@ -2,9 +2,10 @@
   width: 100vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #edfafd;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .App-header {
