@@ -6,9 +6,8 @@ import { DashBContext } from "../../Context/DashBContext";
 import { CardDay } from "../../Components/CardDay";
 
 const Dashboard = () => {
-  const { userData, domingo, segunda, terca, quarta, quinta, sexta, sabado } =
-    useContext(DashBContext);
-  console.log(userData);
+  const { userData, domingo, segunda, terca, quarta, quinta, sexta, sabado } = useContext(DashBContext);
+  //console.log(userData);
 
   return (
     <Body>

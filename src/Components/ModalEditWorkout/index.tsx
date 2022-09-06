@@ -1,16 +1,32 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
-import { DivModal, SelectDay } from "./style";
 import { useForm } from "react-hook-form";
+import { DashBContext } from "../../Context/DashBContext";
+import {HiPencilAlt} from "react-icons/hi"
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { DashBContext } from "../../../Context/DashBContext";
 
-export default function ModalExercises() {
+interface IExerciseModify {
+  title: string;
+  rep: number;
+  time: number;
+  day: string;
+  weigth: number;
+  set: number;
+  id: number;
+  userId?: number;
+}
+
+export const ModalEditWorkout = ({id} : IExerciseModify) => {
+  
+  const { modifyWorkout, getWork, test} = useContext(DashBContext);
+  
   const [visible, setVisible] = useState(false);
-  const handler = () => setVisible(true);
+  const handler = () => { 
+    //getWork(id)
+    setVisible(true)
+  };
 
-  const { addWorkout } = useContext(DashBContext);
 
   const closeHandler = () => {
     setVisible(false);
@@ -38,28 +54,18 @@ export default function ModalExercises() {
     console.log(newExercise);
   }; */
 
-  interface IWorkout {
-    title: string;
-    rep: number;
-    time: number;
-    day: string;
-    weigth: number;
-    set: number;
-    id: number;
-    userId?: number;
-  }
+  //type IWorkoutFunction = Omit<IExerciseModify, "">;
 
-  type IWorkoutFunction = Omit<IWorkout, "">;
-
-  const { register, handleSubmit } = useForm<IWorkoutFunction>({
+  const { register, handleSubmit } = useForm<IExerciseModify>({
     resolver: yupResolver(schema),
   });
 
   return (
     <div>
-      <Button auto shadow onClick={handler}>
-        Adicionar Exercício +
-      </Button>
+        
+      <button onClick={handler}>
+        <HiPencilAlt />
+      </button>
 
       <Modal
         css={{ backgroundColor: "#00224e" }}
@@ -74,20 +80,21 @@ export default function ModalExercises() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(addWorkout)}>
+          <form onSubmit={handleSubmit((data) => modifyWorkout(data))}>
               <Input
                 css={{
                   backgroundColor: "#fff",
+                  width: "49%",
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
                 {...register("title")}
                 clearable
-                fullWidth
+                color="primary"
                 size="lg"
                 placeholder="Nome"
-                />
-            <DivModal>
+              //  value={test.title}
+              />
               <Input
                 css={{
                   backgroundColor: "#fff",
@@ -97,8 +104,10 @@ export default function ModalExercises() {
                 }}
                 {...register("rep")}
                 clearable
+                color="primary"
                 size="lg"
                 placeholder="Repetições"
+            //    value={test.rep}
               />
               <Input
                 css={{
@@ -109,12 +118,11 @@ export default function ModalExercises() {
                 }}
                 {...register("set")}
                 clearable
+                color="primary"
                 size="lg"
                 placeholder="Séries"
+             //   value={test.set}
               />
-            </DivModal>
-
-            <DivModal>
               <Input
                 css={{
                   backgroundColor: "#fff",
@@ -124,8 +132,10 @@ export default function ModalExercises() {
                 }}
                 {...register("weigth")}
                 clearable
+                color="primary"
                 size="lg"
                 placeholder="Peso"
+              //  value={test.weigth}
               />
               <Input
                 css={{
@@ -136,29 +146,14 @@ export default function ModalExercises() {
                 }}
                 {...register("time")}
                 clearable
+                color="primary"
                 size="lg"
                 placeholder="Tempo de descanso"
+          /*       value={test.time} */
               />
-            </DivModal>
-
-            <DivModal>
-              <SelectDay {...register("day")} id="modalDays">
-                <option value="domingo">Domingo</option>
-                <option value="segunda">Segunda-feira</option>
-                <option value="terca">Terça-feira</option>
-                <option value="quarta">Quarta-feira</option>
-                <option value="quinta">Quinta-feira</option>
-                <option value="sexta">Sexta-feira</option>
-                <option value="sabado">Sábado</option>
-              </SelectDay>
-
-              <Button css={{
-                  backgroundColor: "#C9CEFC",
-                  width: "49%",
-                }} type="submit" auto>
-                Adicionar a lista
+              <Button type="submit" auto >
+                Atualizar
               </Button>
-            </DivModal>
           </form>
         </Modal.Body>
       </Modal>

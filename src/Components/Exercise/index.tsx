@@ -1,4 +1,7 @@
-import { Dropdown } from "@nextui-org/react";
+import { useContext } from "react";
+import { DashBContext } from "../../Context/DashBContext";
+import { ModalEditWorkout } from "../ModalEditWorkout";
+import {BsFillTrashFill} from "react-icons/bs"
 
 interface Iworkout {
   title: string;
@@ -10,15 +13,10 @@ interface Iworkout {
   id: number;
 }
 
-export const Exercise = ({
-  title,
-  rep,
-  time,
-  day,
-  weigth,
-  set,
-  id,
-}: Iworkout) => {
+export const Exercise = ({title, rep, time, day, weigth, set, id,}: Iworkout) => {
+
+  const { deleteWorkout } = useContext(DashBContext);
+ 
   return (
     <li>
       <div>
@@ -28,15 +26,11 @@ export const Exercise = ({
         <p>Tempo de descanso: {time}</p>
         <p>Peso {weigth} Kg</p>
       </div>
-      <Dropdown>
-        <Dropdown.Button light>...</Dropdown.Button>
-        <Dropdown.Menu aria-label="Static Actions">
-          <Dropdown.Item key="edit">Editar exercício</Dropdown.Item>
-          <Dropdown.Item key="delete" color="error" withDivider>
-            Excluir exercício
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+            <ModalEditWorkout id={id}/>
+          <button
+           onClick={() => deleteWorkout(id)}>
+            <BsFillTrashFill />
+          </button>
     </li>
   );
 };

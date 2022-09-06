@@ -13,10 +13,12 @@ interface DashBContextProps {
   sexta: IWorkout[] | [];
   sabado: IWorkout[] | [];
   addWorkout: (data: IWorkout) => void;
-  modifyWorkout: (idWorkout: number, data: IExerciseModify) => void;
+  modifyWorkout: (data: IExerciseModify) => void;
   deleteWorkout: (idWorkout: number) => void;
   modifyUser: () => void;
   deleteUser: () => void;
+  getWork: (idWorkout: number) => void,
+  test: IWorkout 
 }
 
 interface DashBProviderProps {
@@ -55,20 +57,22 @@ interface IWorkout {
 }
 
 interface IExerciseModify {
-  title?: string;
-  rep?: number;
-  time?: number;
-  day?: string;
-  weigth?: number;
-  set?: number;
-  id?: number;
-  userId: number;
+  title: string;
+  rep: number;
+  time: number;
+  day: string;
+  weigth: number;
+  set: number;
+  id: number;
+  userId?: number;
 }
 
 const DashBProvider = ({ children }: DashBProviderProps) => {
   const [userData, setUserData] = useState<IUser>({} as IUser);
   const userToken = localStorage.getItem("userToken");
   const id = Number(localStorage.getItem("userId"));
+
+  const [test, setTest] = useState<IExerciseModify>({} as IExerciseModify)
 
   const [workouts, setWorkouts] = useState<IWorkout[]>([]);
 
@@ -138,16 +142,28 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       });
   };
 
-  const modifyWorkout = (idWorkout: number, data: IExerciseModify) => {
-    data.userId = id;
+  const getWork = (idWorkout: number) => {
     api
+      .get(`/workouts/${idWorkout}`)
+      .then((resp) => {
+        setTest(resp.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const modifyWorkout = (data: IExerciseModify) => {
+   // data.userId = id;
+    console.log(data)
+   /*  api
       .patch(`/workouts/${idWorkout}`, data)
       .then((resp) => {
         getWorkouts();
       })
       .catch((err) => {
         console.error(err);
-      });
+      }); */
   };
 
   const deleteWorkout = (idWorkout: number) => {
@@ -189,6 +205,8 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
         deleteWorkout,
         modifyUser,
         deleteUser,
+        test,
+        getWork
       }}
     >
       {children}
