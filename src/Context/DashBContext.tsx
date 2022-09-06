@@ -17,8 +17,8 @@ interface DashBContextProps {
   deleteWorkout: (idWorkout: number) => void;
   modifyUser: () => void;
   deleteUser: () => void;
-  getWork: (idWorkout: number) => void,
-  test: IWorkout 
+  getWork: (idWorkout: number) => void;
+  oneWorkout: IWorkout;
 }
 
 interface DashBProviderProps {
@@ -72,7 +72,9 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   const userToken = localStorage.getItem("userToken");
   const id = Number(localStorage.getItem("userId"));
 
-  const [test, setTest] = useState<IExerciseModify>({} as IExerciseModify)
+  const [oneWorkout, setOneWorkout] = useState<IExerciseModify>(
+    {} as IExerciseModify
+  );
 
   const [workouts, setWorkouts] = useState<IWorkout[]>([]);
 
@@ -146,7 +148,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
     api
       .get(`/workouts/${idWorkout}`)
       .then((resp) => {
-        setTest(resp.data);
+        setOneWorkout(resp.data);
       })
       .catch((err) => {
         console.error(err);
@@ -154,20 +156,17 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   };
 
   const modifyWorkout = (data: IExerciseModify) => {
-   // data.userId = id;
-    console.log(data)
-   /*  api
-      .patch(`/workouts/${idWorkout}`, data)
+    api
+      .patch(`/workouts/${oneWorkout.id}`, data)
       .then((resp) => {
         getWorkouts();
       })
       .catch((err) => {
         console.error(err);
-      }); */
+      });
   };
 
   const deleteWorkout = (idWorkout: number) => {
-    /* const filtered = workouts.filter((toRemove) => toRemove.id !== idToRemove)*/
     api
       .delete(`/workouts/${idWorkout}`)
       .then((resp) => getWorkouts())
@@ -205,8 +204,8 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
         deleteWorkout,
         modifyUser,
         deleteUser,
-        test,
-        getWork
+        oneWorkout,
+        getWork,
       }}
     >
       {children}

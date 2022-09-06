@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { DashBContext } from "../../Context/DashBContext";
 import { ModalEditWorkout } from "../ModalEditWorkout";
-import {BsFillTrashFill} from "react-icons/bs"
+import { BsFillTrashFill } from "react-icons/bs";
 
 interface Iworkout {
   title: string;
@@ -13,10 +13,17 @@ interface Iworkout {
   id: number;
 }
 
-export const Exercise = ({title, rep, time, day, weigth, set, id,}: Iworkout) => {
-
+export const Exercise = ({
+  title,
+  rep,
+  time,
+  day,
+  weigth,
+  set,
+  id,
+}: Iworkout) => {
   const { deleteWorkout } = useContext(DashBContext);
- 
+
   return (
     <li>
       <div>
@@ -26,11 +33,10 @@ export const Exercise = ({title, rep, time, day, weigth, set, id,}: Iworkout) =>
         <p>Tempo de descanso: {time}</p>
         <p>Peso {weigth} Kg</p>
       </div>
-            <ModalEditWorkout id={id}/>
-          <button
-           onClick={() => deleteWorkout(id)}>
-            <BsFillTrashFill />
-          </button>
+      <ModalEditWorkout id={id} />
+      <button onClick={() => deleteWorkout(id)}>
+        <BsFillTrashFill />
+      </button>
     </li>
   );
 };
