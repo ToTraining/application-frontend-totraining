@@ -1,19 +1,25 @@
 import React, { useContext, useState, createContext } from "react";
 import { Modal, Input } from "@nextui-org/react";
-import { DivModal, SelectDay, SelectExercises } from "./style";
+import {
+  ButtonUserMenu,
+  DivModal,
+  SelectDay,
+  SelectExercises,
+  ButtonUserMenuLogout,
+} from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { DashBContext } from "../../../Context/DashBContext";
-import axios from "axios"
+import axios from "axios";
 import { api } from "../../../service/api";
 import { Dropdown, Avatar, Text, Grid, User, Button } from "@nextui-org/react";
 
 export default function ModalEdiProfile() {
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
-  const {modifyUser, deleteUser} = useContext(DashBContext)
+  const { modifyUser, deleteUser } = useContext(DashBContext);
 
   const navigate = useNavigate();
 
@@ -40,13 +46,13 @@ export default function ModalEdiProfile() {
       cellphone: data.cellphone,
       url: data.url,
     };
-    modifyUser(dataEditProfile)
+    modifyUser(dataEditProfile);
     console.log(dataEditProfile);
   };
 
-  function toDeleteUser(){
-    deleteUser()
-    navigate("/")
+  function toDeleteUser() {
+    deleteUser();
+    navigate("/");
   }
 
   const toLogout = () => {
@@ -60,33 +66,33 @@ export default function ModalEdiProfile() {
 
   return (
     <div>
+      <Grid.Container justify="flex-start" gap={2}>
+        <Grid>
+          <Dropdown placement="bottom-left">
+            <Dropdown.Trigger>
+              <Avatar
+                bordered
+                size="lg"
+                as="button"
+                color="secondary"
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              />
+            </Dropdown.Trigger>
+            <Dropdown.Menu css={{ maxWidth: "200px" }}>
+              <Dropdown.Item css={{ width: "200px" }}>
+                <ButtonUserMenu onClick={handler}>Editar Perfil</ButtonUserMenu>
+              </Dropdown.Item>
 
-<Grid.Container justify="flex-start" gap={2}>
-      <Grid>
-        <Dropdown placement="bottom-left">
-          <Dropdown.Trigger>
-            <Avatar
-              bordered
-              size="lg"
-              as="button"
-              color="secondary"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-            />
-          </Dropdown.Trigger>
-          <Dropdown.Menu color="secondary" aria-label="Avatar Actions">
-            <Dropdown.Item>
-                <Button onClick={handler}>Editar Perfil</Button>
-            </Dropdown.Item>
-
-            <Dropdown.Item>
-                 <Button onClick={toLogout}>Logout</Button>
-            </Dropdown.Item>
-
-          </Dropdown.Menu>
-        </Dropdown>
-      </Grid>
-      <Grid></Grid>
-    </Grid.Container>
+              <Dropdown.Item withDivider css={{ width: "200px" }}>
+                <ButtonUserMenuLogout onClick={toLogout}>
+                  Logout
+                </ButtonUserMenuLogout>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Grid>
+        <Grid></Grid>
+      </Grid.Container>
 
       {/* <Button auto shadow onClick={handler}>
         Editar Perfil
@@ -218,15 +224,15 @@ export default function ModalEdiProfile() {
   );
 }
 
-    // api.delete(`/user/${id}`)
-    // .then((response)=>{
+// api.delete(`/user/${id}`)
+// .then((response)=>{
 
-    // })
+// })
 
-    // axios.delete(`https://totraining.herokuapp.com/user/${id}`,{
-    //     headers:{
-    //         // Authorization: token
-    //     }
-    // }).catch((err)=>{
-    //     console.log(err)
-    // })
+// axios.delete(`https://totraining.herokuapp.com/user/${id}`,{
+//     headers:{
+//         // Authorization: token
+//     }
+// }).catch((err)=>{
+//     console.log(err)
+// })
