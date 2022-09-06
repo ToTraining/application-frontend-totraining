@@ -1,25 +1,25 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import LogoTipo from "../../assets/LogoTipo.png";
+
 import * as React from "react";
 import { Input, Button } from "@nextui-org/react";
 import { useContext } from "react";
 import { RegisterContext } from "../../Context/RegisterContext";
 import {
-  ContainerRegister,
-  DivFormImg,
+  DivImg,
   DivForm,
-  DivFormHeader,
+  Header,
   DivFormTitulo,
   BtnDiv,
   DivMain,
   Main,
-  BtnCadastrar
+  BtnCadastrar,
 } from "./styled";
-import Yoga from "../../assets/yoga.png"
+import Yoga from "../../assets/yoga.png";
 
 import "react-toastify/dist/ReactToastify.css";
-
 
 interface IForm {
   name: string;
@@ -77,15 +77,15 @@ const Register = () => {
 
   return (
     <>
-          <DivFormHeader>
-            <p>toTraining</p>
-          </DivFormHeader>
-    <Main>
-        <DivFormImg>
+      <Header>
+        <img src={LogoTipo} alt="Logotipo" />
+      </Header>
+      <Main>
+        <DivImg>
           {/* div form imagem*/}
-          <img src= {Yoga} alt="imagemRegister" />
-        </DivFormImg>
-      <ContainerRegister>
+          <img src={Yoga} alt="imagemRegister" />
+        </DivImg>
+
         <DivForm>
           <form
             onSubmit={handleSubmit(async (data) => {
@@ -93,77 +93,88 @@ const Register = () => {
             })}
           >
             <DivMain>
-              
-                <DivFormTitulo>
-                  <h1>Registro</h1>
-                </DivFormTitulo>
+              <DivFormTitulo>
+                <h1>Registro</h1>
+              </DivFormTitulo>
 
-                <Input css={{ width: "32vh"}} label="" placeholder="Nome" {...register("name")} />
-                <span>{errors.name?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Nome"
+                {...register("name")}
+              />
+              <span>{errors.name?.message}</span>
 
-                <Input css={{ width: "32vh"}} label="" placeholder="E-mail" {...register("email")} />
-                <span>{errors.email?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="E-mail"
+                {...register("email")}
+              />
+              <span>{errors.email?.message}</span>
 
-                <Input
-                css={{ width: "32vh"}}
-                  label=""
-                  placeholder="Telefone"
-                  {...register("cellphone")}
-                />
-                <span>{errors.cellphone?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Telefone"
+                {...register("cellphone")}
+              />
+              <span>{errors.cellphone?.message}</span>
 
-                <Input css={{ width: "32vh"}} label="" placeholder="Idade" {...register("age")} />
-                <span>{errors.age?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Idade"
+                {...register("age")}
+              />
+              <span>{errors.age?.message}</span>
 
-                <Input css={{ width: "32vh"}} label="" placeholder="URL" {...register("url")} />
-                <span>{errors.url?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="URL"
+                {...register("url")}
+              />
+              <span>{errors.url?.message}</span>
 
-                <Input.Password
-                  css={{ width: "32vh"}}
-                  label=""
-                  placeholder="Password"
-                  initialValue=""
-                  {...register("password")}
-                />
-                <span>{errors.password?.message}</span>
+              <Input.Password
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Password"
+                initialValue=""
+                {...register("password")}
+              />
+              <span>{errors.password?.message}</span>
 
-                <Input.Password
-                 css={{ width: "32vh"}}
-                  label=""
-                  placeholder="Confirmação de senha"
-                  {...register("confirmPassword")}
-                />
-                <span>{errors.confirmPassword?.message}</span>
+              <Input.Password
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Confirmação de senha"
+                {...register("confirmPassword")}
+              />
+              <span>{errors.confirmPassword?.message}</span>
 
-
-                <BtnDiv>
-                  <BtnCadastrar  
-                    css={{ width: "70%" }}
-                    
-                    auto
-                    type="submit"
-                  >
-                    Cadastrar
-                  </BtnCadastrar>
-                  <hr />
-                  <Button
-                    css={{
-                      background: "transparent",
-                      height: "1.5rem",
-                      color: "white",
-                      
-                    }}
-                    onClick={(event) => navigate("/")}
-                  >
-                    Já possui registro ? Faça o seu login.
-                  </Button>
-                </BtnDiv>
-              
+              <BtnDiv>
+                <BtnCadastrar css={{ width: "200px" }} auto type="submit">
+                  Cadastrar
+                </BtnCadastrar>
+                <hr />
+                <Button
+                  css={{
+                    background: "transparent",
+                    height: "1.5rem",
+                    color: "white",
+                    width: "250px",
+                  }}
+                  onClick={(event) => navigate("/")}
+                >
+                  Já possui registro ? Faça o seu login.
+                </Button>
+              </BtnDiv>
             </DivMain>
           </form>
         </DivForm>
-      </ContainerRegister>
-    </Main>
+      </Main>
     </>
   );
 };
