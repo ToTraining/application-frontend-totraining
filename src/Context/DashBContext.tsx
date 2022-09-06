@@ -130,7 +130,8 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
 
   useEffect(() => {
     getWorkouts();
-  }, [userToken]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const addWorkout = (data: IWorkout) => {
     data.userId = id;

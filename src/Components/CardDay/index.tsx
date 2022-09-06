@@ -1,4 +1,5 @@
 import { Exercise } from "../Exercise";
+import { ContainerDay, ContainerOverFlow } from "./style";
 
 interface ITitleCard {
   titulo: string;
@@ -17,11 +18,12 @@ interface IWorkout {
 
 export const CardDay = ({ titulo, workoutDay }: ITitleCard) => {
   return (
-    <ul>
+    <ContainerDay>
       <h3>{titulo}</h3>
-      {workoutDay.map((elemento) => {
-        return (
-          <Exercise
+      <ContainerOverFlow>
+        {workoutDay.map((elemento) => {
+          return (
+            <Exercise
             title={elemento.title}
             rep={elemento.rep}
             time={elemento.time}
@@ -30,9 +32,10 @@ export const CardDay = ({ titulo, workoutDay }: ITitleCard) => {
             set={elemento.set}
             id={elemento.id}
             key={elemento.id}
-          />
-        );
-      })}
-    </ul>
+            />
+            );
+          })}
+      </ContainerOverFlow>
+    </ContainerDay>
   );
 };

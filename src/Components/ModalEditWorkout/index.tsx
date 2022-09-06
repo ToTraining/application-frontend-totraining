@@ -5,6 +5,7 @@ import { DashBContext } from "../../Context/DashBContext";
 import { HiPencilAlt } from "react-icons/hi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { ButtonEdit } from "./style";
 
 interface IExerciseModify {
   title: string;
@@ -45,9 +46,9 @@ export const ModalEditWorkout = ({ id }: any) => {
 
   return (
     <div>
-      <button onClick={handler}>
+      <ButtonEdit onClick={handler}>
         <HiPencilAlt />
-      </button>
+      </ButtonEdit>
 
       <Modal
         css={{ backgroundColor: "#00224e" }}

@@ -1,46 +1,25 @@
 import styled from "styled-components";
 
-export const CardsContainer = styled.div`
-  gap: 15px;
-  display: -webkit-box;
-  flex-direction: row;
-  overflow-x: scroll;
-  scrollbar-color: #0077b6;
+export const ContainerDay = styled.ul`
+  width: 16.5rem;
+  height: 25rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: bisque;
+  border-radius: 10px;
+  border: 1px solid blue;
+`
 
-  ul {
-    display: flex;
-    justify-content: center;
-    height: 400px;
-    width: 200px;
-    background-color: #0077b6;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    color: white;
-  }
-`;
-
-// export const UlDashboard = styled.ul`
-
-// gap: 15px;
-// display: -webkit-box;
-// flex-direction: row;
-// overflow-x: scroll;
-// scrollbar-color: #0077B6;
-
-// margin: 0;
-// padding: 0;
-
-// .cardDashboard{
-//     height: 400px;
-//     width: 200px;
-//     background-color: #0077B6;
-//     margin-bottom: 5px;
-// }
-
-// .titleCards{
-//      display: flex;
-//     justify-content: center;
-//     color: white;
-// }
-
-// `
+export const ContainerOverFlow = styled.div`
+  width: 90%;
+  height: 21rem;
+  max-height: 23rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-x: hidden;
+`
