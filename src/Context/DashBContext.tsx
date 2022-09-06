@@ -12,6 +12,7 @@ interface DashBContextProps {
   deleteWorkout: Function;
   modifyWorkout: Function;
   addWorkout: Function;
+
 }
 
 interface DashBProviderProps {
@@ -75,18 +76,55 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
     setSabado(workouts.filter((elemento) => elemento.day === "sabado"));
   }, [workouts]);
 
-  const modifyUser = (id: string) => {
+  // const onSubmitEditModal = (data: any) => {
+  //   const dataEditProfile = {
+  //     name: data.name,
+  //     email: data.email,
+  //     age: data.age,
+  //     password: data.password,
+  //     cellphone: data.cellphone,
+  //     url: data.url,
+  //   };
+  //   modifyUser(dataEditProfile)
+  //   console.log(dataEditProfile);
+  // };
+
+  // const newUserData = {
+  //   name: "Joao",
+  //   email: "joao@mail.com",
+  //   age: 50,
+  //   password: "Teste123@",
+  //   cellphone: 988887777,
+  //   url: "www.imagem.com"
+  // }
+
+  const modifyUser = (dataEditProfile: any) => {
+    const token = localStorage.getItem("userToken");
     api
-      .patch(`user/${id}`)
+      .patch(`users/${id}`, dataEditProfile
+      , {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      )
       .then((resp) => {
+        console.log(resp.data);
         setUserData(resp.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-  const deleteUser = (id: string) => {
-    api.delete(`/users/${id}`).catch((err) => {
+
+  const deleteUser = () => {
+    const token = localStorage.getItem("userToken");
+    api.delete(`/users/${id}`, {
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .catch((err) => {
       console.error(err);
     });
   };
@@ -181,6 +219,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
         deleteWorkout,
         modifyWorkout,
         addWorkout,
+        
       }}
     >
       {children}
