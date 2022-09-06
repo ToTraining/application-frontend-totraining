@@ -140,14 +140,15 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
 
   const modifyWorkout = (idWorkout: number, data: IExerciseModify) => {
     data.userId = id;
-    api
+    console.log(data);
+    /* api
       .patch(`/workouts/${idWorkout}`, data)
       .then((resp) => {
         getWorkouts();
       })
       .catch((err) => {
         console.error(err);
-      });
+      }); */
   };
 
   const deleteWorkout = (idWorkout: number) => {
