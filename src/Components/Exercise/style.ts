@@ -47,6 +47,7 @@ export const ContainerInfoWorkout = styled.div`
   width: 100%;
   height: 4rem;
   p {
+    width: 100%;
     font-size: small;
     color: black;
   }

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Body = styled.div`
   width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +17,8 @@ export const Body = styled.div`
     align-items: center;
     padding-top: 10px;
     padding-bottom: 5px;
+    padding-left: 2em;
+    padding-right: 2em;
 
     border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
     margin-bottom: 5px;
@@ -24,28 +27,6 @@ export const Body = styled.div`
     margin-left: 1em;
     width: 60px;
     height: 50px;
-  }
-  header figure {
-    background-color: grey;
-    border-radius: 50px;
-    border: solid black;
-
-    display: flex;
-    align-items: center;
-
-    width: 70px;
-    height: 70px;
-
-    margin-right: 1em;
-    cursor: pointer;
-  }
-
-  header figure img {
-    border-radius: 50px;
-    margin: 0;
-    width: auto;
-    height: auto;
-    cursor: pointer;
   }
 
   main {
@@ -56,10 +37,10 @@ export const Body = styled.div`
   }
   @media (min-width: 500px) {
     header figure {
-      margin-right: 3em;
+      margin-right: 0;
     }
     header img {
-      margin-left: 4em;
+      margin-left: 0;
     }
   }
 `;
