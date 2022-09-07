@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import CardDashboard from "../../Components/CardDashboardComponent/CardDashboard";
 import ModalExercises from "../../Components/ModalComponent/ModalExercises";
 import { Body, MainHeader } from "./style";
 import logo from "../../assets/logo.png";
