@@ -5,6 +5,7 @@ import { number } from "yup";
 import { api } from "../service/api";
 
 interface DashBContextProps {
+  oneWorkout: IWorkout;
   userData: IUser;
   domingo: IWorkout[] | [];
   segunda: IWorkout[] | [];
@@ -19,7 +20,6 @@ interface DashBContextProps {
   modifyUser: () => void;
   deleteUser: () => void;
   getWork: (idWorkout: number) => void;
-  oneWorkout: IWorkout;
 }
 
 interface DashBProviderProps {
@@ -43,17 +43,17 @@ interface IUser {
 }
 
 interface IExercise {
-  name: string;
-  rep: string;
-  day: string;
+  name?: string;
+  rep?: string;
+  day?: string;
   userId?: number;
 }
 
 interface IExerciseModify {
   name?: string;
-  rep?: string;
+  rep?: number;
   day?: string;
-  userId: number;
+  userId?: number;
 }
 
 export const DashBContext = createContext<DashBContextProps>(
@@ -62,9 +62,9 @@ export const DashBContext = createContext<DashBContextProps>(
 
 interface IWorkout {
   title: string;
-  rep: number;
+  rep?: number;
   time: number;
-  day: string;
+  day?: string;
   weigth: number;
   set: number;
   id: number;
@@ -73,9 +73,9 @@ interface IWorkout {
 
 interface IExerciseModify {
   title: string;
-  rep: number;
+  rep?: number;
   time: number;
-  day: string;
+  day?: string;
   weigth: number;
   set: number;
   id: number;
@@ -207,6 +207,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   return (
     <DashBContext.Provider
       value={{
+        oneWorkout,
         userData,
         domingo,
         segunda,
@@ -220,7 +221,6 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
         deleteWorkout,
         modifyUser,
         deleteUser,
-        oneWorkout,
         getWork,
       }}
     >

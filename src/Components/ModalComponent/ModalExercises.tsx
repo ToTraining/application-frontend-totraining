@@ -5,7 +5,7 @@ import { AddExerciseBtn, DivModal, SelectDay, SelectExercises } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { DashBContext } from "../../../Context/DashBContext";
+import { DashBContext } from "../../Context/DashBContext";
 
 export default function ModalExercises() {
   const [visible, setVisible] = useState(false);
@@ -26,18 +26,6 @@ export default function ModalExercises() {
     // restTime: yup.number().required(),
     // day: yup.string().required(),
   });
-  /* 
-  const onSubmitModal = (data: any) => {
-    const newExercise = {
-      exercise: data.exercise,
-      repetition: data.repetition,
-      series: data.series,
-      weight: data.weight,
-      restTime: data.restTime,
-      day: data.day,
-    };
-    console.log(newExercise);
-  }; */
 
   interface IWorkout {
     title: string;

@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import CardDashboard from "../../Components/CardDashboardComponent/CardDashboard";
 import ModalExercises from "../../Components/ModalComponent/ModalExercises";
-import { Body, MainHeader } from "./style";
+import { Body, CardsContainer, MainHeader } from "./style";
 import logo from "../../assets/logo.png";
 import { DashBContext } from "../../Context/DashBContext";
 import ModalEdiProfile from "./ModalHeader";
@@ -32,18 +31,20 @@ const Dashboard = () => {
 
         <ModalEdiProfile />
       </header>
-      <div>
+      <MainHeader>
         <h2>{userData.name}</h2>
         <ModalExercises />
-      </div>
+      </MainHeader>
       <main>
-        <CardDay titulo="Domingo" workoutDay={domingo} />
-        <CardDay titulo="Segunda-feira" workoutDay={segunda} />
-        <CardDay titulo="Terça-feira" workoutDay={terca} />
-        <CardDay titulo="Quarta-feira" workoutDay={quarta} />
-        <CardDay titulo="Quinta-feira" workoutDay={quinta} />
-        <CardDay titulo="Sexta-feira" workoutDay={sexta} />
-        <CardDay titulo="Sábado" workoutDay={sabado} />
+        <CardsContainer>
+          <CardDay titulo="Domingo" workoutDay={domingo} />
+          <CardDay titulo="Segunda-feira" workoutDay={segunda} />
+          <CardDay titulo="Terça-feira" workoutDay={terca} />
+          <CardDay titulo="Quarta-feira" workoutDay={quarta} />
+          <CardDay titulo="Quinta-feira" workoutDay={quinta} />
+          <CardDay titulo="Sexta-feira" workoutDay={sexta} />
+          <CardDay titulo="Sábado" workoutDay={sabado} />
+        </CardsContainer>
       </main>
     </Body>
   );

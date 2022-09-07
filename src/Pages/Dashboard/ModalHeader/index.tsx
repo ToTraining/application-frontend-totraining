@@ -9,7 +9,8 @@ import {
   MenuDropdown,
   DropdownItem,
   AvatarDrop,
-  DropdownTrigger
+  DropdownTrigger,
+  DropdownStyle,
 } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -32,7 +33,7 @@ interface DataEditProf {
 export default function ModalEditProfile() {
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
-  const { modifyUser, deleteUser } = useContext(DashBContext);
+  const { modifyUser, deleteUser, userData } = useContext(DashBContext);
 
   const navigate = useNavigate();
 
@@ -78,15 +79,9 @@ export default function ModalEditProfile() {
 
   return (
     <div>
-
       <Dropdown placement="bottom-left">
         <DropdownTrigger>
-          <AvatarDrop
-            bordered
-            size="lg"
-            color="secondary"
-            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-          />
+          <AvatarDrop bordered size="lg" color="secondary" src={userData.url} />
         </DropdownTrigger>
         <MenuDropdown variant="light">
           <DropdownItem>
@@ -100,13 +95,6 @@ export default function ModalEditProfile() {
           </DropdownItem>
         </MenuDropdown>
       </Dropdown>
-
-      {/* <Button auto shadow onClick={handler}>
-        Editar Perfil
-      </Button> */}
-      {/* <Button color="gradient" onClick={toLogout} auto>
-        Logout
-      </Button> */}
 
       <Modal
         css={{ backgroundColor: "#00224e" }}
