@@ -41,7 +41,7 @@ const Login = () => {
   return (
     <>
       <Header>
-        <img src={LogoTipo} alt="" />
+        <img src={LogoTipo} alt="Logotipo" />
       </Header>
       <Main>
         <DivImg>
@@ -60,6 +60,7 @@ const Login = () => {
               </DivFormTitulo>
               <Input
                 css={{ width: "195px" }}
+                aria-label="email"
                 placeholder="E-mail"
                 {...register("email")}
               />
