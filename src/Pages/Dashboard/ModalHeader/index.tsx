@@ -3,25 +3,20 @@ import { Modal, Input } from "@nextui-org/react";
 import {
   ButtonUserMenu,
   DivModal,
-  SelectDay,
-  SelectExercises,
   ButtonUserMenuLogout,
   MenuDropdown,
   DropdownItem,
   AvatarDrop,
   DropdownTrigger,
-  DropdownStyle,
 } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { DashBContext } from "../../../Context/DashBContext";
-import axios from "axios";
-import { api } from "../../../service/api";
 import { Dropdown, Avatar, Text, Grid, User, Button } from "@nextui-org/react";
 
-interface DataEditProf {
+interface dataEditProf {
   name: string;
   email: string;
   age: number;
@@ -42,26 +37,11 @@ export default function ModalEditProfile() {
     // console.log("closed");
   };
 
-  const schema = yup.object().shape({
-    // exercise: yup.string().required(),
-    // repetition: yup.number().required(),
-    // series: yup.number().required(),
-    // weigth: yup.number().required(),
-    // restTime: yup.number().required(),
-    // day: yup.string().required(),
-  });
+  type IUserDataEdit = Omit<dataEditProf, "">;
 
-  // const onSubmitEditModal = (data: DataEditProf) => {
-  //   // const dataEditProfile = {
-  //   //   name: data.name,
-  //   //   email: data.email,
-  //   //   age: data.age,
-  //   //   password: data.password,
-  //   //   cellphone: data.cellphone,
-  //   //   url: data.url,
-  //   // };
-  //   modifyUser(data);
-  // };
+  const schema = yup.object().shape({
+    /* password: yup.string().required("Senha obrigatória"), */
+  });
 
   function toDeleteUser() {
     deleteUser();
@@ -73,7 +53,7 @@ export default function ModalEditProfile() {
     navigate("/");
   };
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<IUserDataEdit>({
     resolver: yupResolver(schema),
   });
 
@@ -119,25 +99,12 @@ export default function ModalEditProfile() {
                   marginBottom: "8px",
                 }}
                 {...register("name")}
+                initialValue={userData.name}
                 clearable
                 color="primary"
                 size="lg"
                 aria-label="Nome"
                 placeholder="Nome"
-              />
-              <Input
-                css={{
-                  backgroundColor: "#fff",
-                  width: "49%",
-                  marginTop: "8px",
-                  marginBottom: "8px",
-                }}
-                {...register("email")}
-                clearable
-                color="primary"
-                size="lg"
-                aria-label="Email"
-                placeholder="Email"
               />
             </DivModal>
 
@@ -149,14 +116,31 @@ export default function ModalEditProfile() {
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
+                {...register("email")}
+                initialValue={userData.email}
+                clearable
+                color="primary"
+                size="lg"
+                aria-label="Email"
+                placeholder="Email"
+              />
+              <Input
+                css={{
+                  backgroundColor: "#fff",
+                  width: "49%",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
                 {...register("age")}
+                initialValue={userData.age}
+                type="number"
                 clearable
                 color="primary"
                 size="lg"
                 aria-label="Idade"
                 placeholder="Idade"
               />
-              <Input
+              {/*               <Input
                 css={{
                   backgroundColor: "#fff",
                   width: "49%",
@@ -169,7 +153,7 @@ export default function ModalEditProfile() {
                 size="lg"
                 aria-label="Senha"
                 placeholder="Senha"
-              />
+              /> */}
             </DivModal>
 
             <DivModal>
@@ -181,6 +165,7 @@ export default function ModalEditProfile() {
                   marginBottom: "8px",
                 }}
                 {...register("cellphone")}
+                initialValue={userData.cellphone}
                 clearable
                 color="primary"
                 size="lg"
@@ -196,11 +181,12 @@ export default function ModalEditProfile() {
                   marginBottom: "8px",
                 }}
                 {...register("url")}
+                initialValue={userData.url}
                 clearable
                 color="primary"
                 size="lg"
                 aria-label="Url"
-                placeholder="Url"
+                placeholder="Imagem url"
               />
             </DivModal>
 
@@ -218,16 +204,3 @@ export default function ModalEditProfile() {
     </div>
   );
 }
-
-// api.delete(`/user/${id}`)
-// .then((response)=>{
-
-// })
-
-// axios.delete(`https://totraining.herokuapp.com/user/${id}`,{
-//     headers:{
-//         // Authorization: token
-//     }
-// }).catch((err)=>{
-//     console.log(err)
-// })

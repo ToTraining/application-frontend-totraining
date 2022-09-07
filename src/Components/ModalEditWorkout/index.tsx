@@ -18,7 +18,11 @@ interface IExerciseModify {
   userId?: number;
 }
 
-export const ModalEditWorkout = ({ id }: any) => {
+interface IId {
+  id: number;
+}
+
+export const ModalEditWorkout = ({ id }: IId) => {
   const { modifyWorkout, getWork, oneWorkout } = useContext(DashBContext);
 
   const [visible, setVisible] = useState(false);
@@ -31,14 +35,7 @@ export const ModalEditWorkout = ({ id }: any) => {
     setVisible(false);
   };
 
-  const schema = yup.object().shape({
-    // exercise: yup.string().required(),
-    // repetition: yup.number().required(),
-    // series: yup.number().required(),
-    // weigth: yup.number().required(),
-    // restTime: yup.number().required(),
-    // day: yup.string().required(),
-  });
+  const schema = yup.object().shape({});
 
   const { register, handleSubmit } = useForm<IExerciseModify>({
     resolver: yupResolver(schema),
@@ -72,11 +69,11 @@ export const ModalEditWorkout = ({ id }: any) => {
                 marginBottom: "8px",
               }}
               {...register("title")}
+              initialValue={oneWorkout.title}
               clearable
               color="primary"
               size="lg"
               placeholder="Nome"
-              value={oneWorkout.title}
             />
             <Input
               css={{
@@ -86,11 +83,11 @@ export const ModalEditWorkout = ({ id }: any) => {
                 marginBottom: "8px",
               }}
               {...register("rep")}
+              initialValue={oneWorkout.rep}
               clearable
               color="primary"
               size="lg"
               placeholder="Repetições"
-              value={oneWorkout.rep}
             />
             <Input
               css={{
@@ -100,11 +97,11 @@ export const ModalEditWorkout = ({ id }: any) => {
                 marginBottom: "8px",
               }}
               {...register("set")}
+              initialValue={oneWorkout.set}
               clearable
               color="primary"
               size="lg"
               placeholder="Séries"
-              value={oneWorkout.set}
             />
             <Input
               css={{
@@ -114,11 +111,11 @@ export const ModalEditWorkout = ({ id }: any) => {
                 marginBottom: "8px",
               }}
               {...register("weigth")}
+              initialValue={oneWorkout.weigth}
               clearable
               color="primary"
               size="lg"
               placeholder="Peso"
-              value={oneWorkout.weigth}
             />
             <Input
               css={{
@@ -128,11 +125,11 @@ export const ModalEditWorkout = ({ id }: any) => {
                 marginBottom: "8px",
               }}
               {...register("time")}
+              initialValue={oneWorkout.time}
               clearable
               color="primary"
               size="lg"
               placeholder="Tempo de descanso"
-              value={oneWorkout.time}
             />
             <Button type="submit" auto>
               Atualizar

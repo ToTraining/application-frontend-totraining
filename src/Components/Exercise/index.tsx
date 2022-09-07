@@ -1,8 +1,13 @@
 import { useContext } from "react";
 import { DashBContext } from "../../Context/DashBContext";
 import { ModalEditWorkout } from "../ModalEditWorkout";
-import {BsFillTrashFill} from "react-icons/bs"
-import { ButtonDelet, ContainerButtons, ContainerInfoWorkout, ContainerWorkout } from "./style";
+import { BsFillTrashFill } from "react-icons/bs";
+import {
+  ButtonDelet,
+  ContainerButtons,
+  ContainerInfoWorkout,
+  ContainerWorkout,
+} from "./style";
 
 interface Iworkout {
   title: string;
@@ -14,14 +19,21 @@ interface Iworkout {
   id: number;
 }
 
-export const Exercise = ({title, rep, time, day, weigth, set, id,}: Iworkout) => {
-
+export const Exercise = ({
+  title,
+  rep,
+  time,
+  day,
+  weigth,
+  set,
+  id,
+}: Iworkout) => {
   const { deleteWorkout } = useContext(DashBContext);
- 
+
   return (
     <ContainerWorkout>
       <div>
-          <h4>{title}</h4>
+        <h4>{title}</h4>
         <ContainerInfoWorkout>
           <p>{rep} reps</p>
           <p>{set} sets</p>
@@ -30,11 +42,10 @@ export const Exercise = ({title, rep, time, day, weigth, set, id,}: Iworkout) =>
         </ContainerInfoWorkout>
       </div>
       <ContainerButtons>
-            <ModalEditWorkout id={id}/>
-          <ButtonDelet
-           onClick={() => deleteWorkout(id)}>
-            <BsFillTrashFill />
-          </ButtonDelet>
+        <ModalEditWorkout id={id} />
+        <ButtonDelet onClick={() => deleteWorkout(id)}>
+          <BsFillTrashFill />
+        </ButtonDelet>
       </ContainerButtons>
     </ContainerWorkout>
   );
