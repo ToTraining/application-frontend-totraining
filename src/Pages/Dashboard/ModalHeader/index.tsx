@@ -6,6 +6,10 @@ import {
   SelectDay,
   SelectExercises,
   ButtonUserMenuLogout,
+  MenuDropdown,
+  DropdownItem,
+  AvatarDrop,
+  DropdownTrigger
 } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -66,33 +70,27 @@ export default function ModalEdiProfile() {
 
   return (
     <div>
-      <Grid.Container justify="flex-start" gap={2}>
-        <Grid>
-          <Dropdown placement="bottom-left">
-            <Dropdown.Trigger>
-              <Avatar
-                bordered
-                size="lg"
-                as="button"
-                color="secondary"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-              />
-            </Dropdown.Trigger>
-            <Dropdown.Menu css={{ maxWidth: "200px" }}>
-              <Dropdown.Item css={{ width: "200px" }}>
-                <ButtonUserMenu onClick={handler}>Editar Perfil</ButtonUserMenu>
-              </Dropdown.Item>
+      <Dropdown placement="bottom-left">
+        <DropdownTrigger>
+          <AvatarDrop
+            bordered
+            size="lg"
+            color="secondary"
+            src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+          />
+        </DropdownTrigger>
+        <MenuDropdown variant="light">
+          <DropdownItem>
+            <ButtonUserMenu onClick={handler}>Editar Perfil</ButtonUserMenu>
+          </DropdownItem>
 
-              <Dropdown.Item withDivider css={{ width: "200px" }}>
-                <ButtonUserMenuLogout onClick={toLogout}>
-                  Logout
-                </ButtonUserMenuLogout>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Grid>
-        <Grid></Grid>
-      </Grid.Container>
+          <DropdownItem withDivider>
+            <ButtonUserMenuLogout onClick={toLogout}>
+              Logout
+            </ButtonUserMenuLogout>
+          </DropdownItem>
+        </MenuDropdown>
+      </Dropdown>
 
       {/* <Button auto shadow onClick={handler}>
         Editar Perfil
