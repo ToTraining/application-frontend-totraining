@@ -67,7 +67,7 @@ export const MainHeader = styled.div`
   h2 {
     font-size: 1rem;
     color: black;
-    font-weight: boldw;
+    font-weight: bold;
 
     margin-bottom: 0;
   }

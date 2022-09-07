@@ -92,7 +92,12 @@ export default function ModalEditProfile() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(modifyUser)}>
+          <form
+            onSubmit={handleSubmit((data) => {
+              closeHandler();
+              modifyUser(data);
+            })}
+          >
             <DivModal>
               <Input
                 css={{
