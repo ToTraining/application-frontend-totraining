@@ -32,8 +32,10 @@ const Dashboard = () => {
         <ModalEdiProfile />
       </header>
       <MainHeader>
-        <h2>{userData.name}</h2>
-        <ModalExercises />
+        <div>
+          <h2>{userData.name}</h2>
+          <ModalExercises />
+        </div>
       </MainHeader>
       <main>
         <CardsContainer>

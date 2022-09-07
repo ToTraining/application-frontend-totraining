@@ -10,9 +10,6 @@ export const DivModal = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-export const DropdownStyle = styled.div`
-  background-color: red;
-`;
 
 export const SelectExercises = styled.select`
   width: 350px;

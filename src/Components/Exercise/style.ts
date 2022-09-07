@@ -2,22 +2,24 @@ import styled from "styled-components";
 
 export const ContainerWorkout = styled.li`
   width: 95%;
-  height: 5rem;
+  /* min-height: 5rem;
+  max-height: 10rem; */
+  height: fit-content;
   background-color: white;
   border-radius: 8px;
 
   margin: 0;
-  padding: 0;
+  padding: 5px;
 
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-  gap: 2rem;
   padding-left: 0.6rem;
 
   div {
     display: flex;
     flex-direction: column;
+    justify-content: center;
   }
 
   button {
@@ -28,8 +30,10 @@ export const ContainerWorkout = styled.li`
 
   h4 {
     margin: 0;
-    height: 1.6rem;
+    margin-bottom: 5px;
+    height: fit-content;
     color: black;
+    line-height: 1.2em;
   }
 
   p {
@@ -44,11 +48,12 @@ export const ContainerInfoWorkout = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
 
-  width: 100%;
+  width: 70%;
   height: 4rem;
   p {
-    width: 100%;
+    width: 90%;
     font-size: small;
+    font-weight: bold;
     color: black;
   }
 `;
