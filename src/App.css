@@ -5,7 +5,8 @@
   justify-content: center;
   height: 100%;
   width: 100%;
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
+  background-color: #edfafd;
 }
 
 .App-header {
