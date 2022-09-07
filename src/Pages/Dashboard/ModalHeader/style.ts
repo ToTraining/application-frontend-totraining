@@ -32,25 +32,42 @@ export const ButtonUserMenuLogout = styled(Button)`
   width: 200px;
   color: red;
   text-align: center;
+
 `;
 export const MenuDropdown = styled(Dropdown.Menu)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+
+  min-width: 10px;
+
+  
+
 `;
 export const DropdownItem = styled(Dropdown.Item)`
+
   background-color: white !important;
   height: 1px;
+
+
 `;
 
 export const AvatarDrop = styled(Avatar)`
-  img {
-    @media (min-width: 300px) {
-      margin-right: 16px;
+
+    img {
+      @media (min-width: 150px) {
+      
+    margin-right: 16px;
+
+      }
+      @media (min-width: 500px) {
+        margin-right: -1px;
+      }
     }
-    @media (min-width: 500px) {
-      margin-right: 63px;
-    }
-  }
 `;
-export const DropdownTrigger = styled(Dropdown.Trigger)``;
+export const DropdownTrigger = styled(Dropdown.Trigger)`
+
+
+`;
+export const DropdownContainer = styled(Dropdown)`
+
+
+`;
