@@ -11,6 +11,7 @@ import {
   AvatarDrop,
   DropdownTrigger,
   DropdownStyle,
+  DropdownContainer
 } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -76,15 +77,20 @@ export default function ModalEditProfile() {
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
+  const testeStyle={
+    content:{
+      
+    }
+  }
 
   return (
     <div>
-      <Dropdown placement="bottom-left">
-        <DropdownTrigger>
+      <DropdownContainer  placement="bottom-left">
+        <DropdownTrigger >
           <AvatarDrop bordered size="lg" color="secondary" src={userData.url} />
         </DropdownTrigger>
-        <MenuDropdown variant="light">
-          <DropdownItem>
+        <MenuDropdown  variant="light">
+          <DropdownItem >
             <ButtonUserMenu onClick={handler}>Editar Perfil</ButtonUserMenu>
           </DropdownItem>
 
@@ -94,7 +100,7 @@ export default function ModalEditProfile() {
             </ButtonUserMenuLogout>
           </DropdownItem>
         </MenuDropdown>
-      </Dropdown>
+      </DropdownContainer>
 
       <Modal
         css={{ backgroundColor: "#00224e" }}
