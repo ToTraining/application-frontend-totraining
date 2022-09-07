@@ -56,6 +56,7 @@ export default function ModalExercises() {
         <Modal.Body>
           <form onSubmit={handleSubmit(addWorkout)}>
             <Input
+              aria-label="name"
               css={{
                 backgroundColor: "#fff",
                 marginTop: "8px",
@@ -69,6 +70,7 @@ export default function ModalExercises() {
             />
             <DivModal>
               <Input
+                aria-label="repeticoes"
                 css={{
                   backgroundColor: "#fff",
                   width: "49%",
@@ -96,6 +98,7 @@ export default function ModalExercises() {
 
             <DivModal>
               <Input
+                aria-label="peso"
                 css={{
                   backgroundColor: "#fff",
                   width: "49%",
@@ -108,6 +111,7 @@ export default function ModalExercises() {
                 placeholder="Peso"
               />
               <Input
+                aria-label="tempo"
                 css={{
                   backgroundColor: "#fff",
                   width: "49%",
@@ -122,7 +126,7 @@ export default function ModalExercises() {
             </DivModal>
 
             <DivModal>
-              <SelectDay {...register("day")} id="modalDays">
+              <SelectDay {...register("day")} aria-label="dia" id="modalDays">
                 <option value="domingo">Domingo</option>
                 <option value="segunda">Segunda-feira</option>
                 <option value="terca">Terça-feira</option>
@@ -133,8 +137,8 @@ export default function ModalExercises() {
               </SelectDay>
 
               <Button
+                color={"gradient"}
                 css={{
-                  backgroundColor: "#C9CEFC",
                   width: "49%",
                 }}
                 type="submit"

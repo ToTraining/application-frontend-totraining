@@ -199,10 +199,24 @@ export default function ModalEditProfile() {
             </DivModal>
 
             <DivModal>
-              <Button color="gradient" onClick={toDeleteUser} auto>
+              <Button
+                color={"gradient"}
+                css={{
+                  width: "49%",
+                }}
+                onClick={toDeleteUser}
+                auto
+              >
                 Excluir perfil
               </Button>
-              <Button color="gradient" type="submit" auto>
+              <Button
+                color={"gradient"}
+                css={{
+                  width: "49%",
+                }}
+                type="submit"
+                auto
+              >
                 Atualizar perfil
               </Button>
             </DivModal>
