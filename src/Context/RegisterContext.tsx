@@ -53,11 +53,11 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
     api
       .post("/register", data)
       .then((response) => {
-        notifyRegister("Cadastro efetuado com sucesso");
+        notifyRegister("Cadastro efetuado com sucesso!");
         navigate("/");
       })
       .catch((error) => {
-        notifyRegister("Cadastro não foi bem sucedido");
+        notifyRegister("Erro ao cadastrar, tente novamente mais tarde.");
 
         console.log(error);
       });

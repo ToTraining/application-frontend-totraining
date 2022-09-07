@@ -110,22 +110,42 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
     setSexta(workouts.filter((elemento) => elemento.day === "sexta"));
     setSabado(workouts.filter((elemento) => elemento.day === "sabado"));
   }, [workouts]);
+  const notiFy = (message: string) =>
+    toast(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const navigate = useNavigate();
 
   const modifyUser = (data: dataEditProf) => {
     api
       .patch(`users/${id}`, data)
       .then((resp) => {
         setUserData(resp.data);
+        notiFy("Usuário atulizado com sucesso!");
       })
       .catch((err) => {
+        notiFy("Erro ao atulizar usuário.");
         console.error(err);
       });
   };
 
   const deleteUser = () => {
-    api.delete(`/users/${id}`).catch((err) => {
-      console.error(err);
-    });
+    api
+      .delete(`/users/${id}`)
+      .then(() => {
+        notiFy("Usuário deletado com sucesso!");
+      })
+      .catch((err) => {
+        notiFy("Erro ao deletar usuário");
+        console.error(err);
+      });
   };
 
   async function getWorkouts() {
@@ -153,8 +173,10 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       .post("/workouts", data)
       .then((resp) => {
         getWorkouts();
+        notiFy("Exercício adicionado com sucesso!");
       })
       .catch((err) => {
+        notiFy("Erro ao adicionar exercício.");
         console.error(err);
       });
   };
@@ -175,8 +197,10 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       .patch(`/workouts/${oneWorkout.id}`, data)
       .then((resp) => {
         getWorkouts();
+        notiFy("Exercício atualizado com sucesso!");
       })
       .catch((err) => {
+        notiFy("Erro ao atualizar exercício");
         console.error(err);
       });
   };
@@ -184,24 +208,15 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   const deleteWorkout = (idWorkout: number) => {
     api
       .delete(`/workouts/${idWorkout}`)
-      .then((resp) => getWorkouts())
+      .then((resp) => {
+        getWorkouts();
+        notiFy("Exercício deletado com sucesso!");
+      })
       .catch((err) => {
+        notiFy("Erro ao deletar exercício.");
         console.error(err);
       });
   };
-
-  const notiFy = (message: string) =>
-    toast(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-
-  const navigate = useNavigate();
 
   return (
     <DashBContext.Provider

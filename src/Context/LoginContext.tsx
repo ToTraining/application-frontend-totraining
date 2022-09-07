@@ -43,7 +43,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         navigate("/dashboard");
       })
       .catch((err) => {
-        notiFy("O login não foi bem sucedido!");
+        notiFy("Erro ao efetuar login.");
         console.log(err);
       });
   };
