@@ -14,7 +14,6 @@ export default function ModalExercises() {
 
   const closeHandler = () => {
     setVisible(false);
-    // console.log("closed");
   };
 
   const schema = yup.object().shape({});

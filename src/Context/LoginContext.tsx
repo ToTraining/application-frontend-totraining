@@ -44,7 +44,7 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
       })
       .catch((err) => {
         notiFy("Erro ao efetuar login.");
-        console.log(err);
+        console.error(err);
       });
   };
 

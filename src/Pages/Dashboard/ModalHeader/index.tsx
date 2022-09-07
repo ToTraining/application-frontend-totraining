@@ -8,10 +8,7 @@ import {
   DropdownItem,
   AvatarDrop,
   DropdownTrigger,
-
-  DropdownStyle,
-  DropdownContainer
-
+  DropdownContainer,
 } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,7 +35,6 @@ export default function ModalEditProfile() {
 
   const closeHandler = () => {
     setVisible(false);
-    // console.log("closed");
   };
 
   type IUserDataEdit = Omit<dataEditProf, "">;
@@ -60,20 +56,18 @@ export default function ModalEditProfile() {
   const { register, handleSubmit } = useForm<IUserDataEdit>({
     resolver: yupResolver(schema),
   });
-  const testeStyle={
-    content:{
-      
-    }
-  }
+  const testeStyle = {
+    content: {},
+  };
 
   return (
     <div>
-      <DropdownContainer  placement="bottom-left">
-        <DropdownTrigger >
+      <DropdownContainer placement="bottom-left">
+        <DropdownTrigger>
           <AvatarDrop bordered size="lg" color="secondary" src={userData.url} />
         </DropdownTrigger>
-        <MenuDropdown  variant="light">
-          <DropdownItem >
+        <MenuDropdown variant="light">
+          <DropdownItem>
             <ButtonUserMenu onClick={handler}>Editar Perfil</ButtonUserMenu>
           </DropdownItem>
 

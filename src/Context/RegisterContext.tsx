@@ -59,7 +59,7 @@ const RegisterProvider = ({ children }: RegisterProviderProps) => {
       .catch((error) => {
         notifyRegister("Erro ao cadastrar, tente novamente mais tarde.");
 
-        console.log(error);
+        console.error(error);
       });
   };
   return (
