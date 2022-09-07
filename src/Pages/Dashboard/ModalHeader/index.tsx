@@ -20,7 +20,16 @@ import axios from "axios";
 import { api } from "../../../service/api";
 import { Dropdown, Avatar, Text, Grid, User, Button } from "@nextui-org/react";
 
-export default function ModalEdiProfile() {
+interface DataEditProf {
+  name: string;
+  email: string;
+  age: number;
+  password: string;
+  cellphone: number;
+  url: string;
+}
+
+export default function ModalEditProfile() {
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const { modifyUser, deleteUser } = useContext(DashBContext);
@@ -41,18 +50,17 @@ export default function ModalEdiProfile() {
     // day: yup.string().required(),
   });
 
-  const onSubmitEditModal = (data: any) => {
-    const dataEditProfile = {
-      name: data.name,
-      email: data.email,
-      age: data.age,
-      password: data.password,
-      cellphone: data.cellphone,
-      url: data.url,
-    };
-    modifyUser(dataEditProfile);
-    console.log(dataEditProfile);
-  };
+  // const onSubmitEditModal = (data: DataEditProf) => {
+  //   // const dataEditProfile = {
+  //   //   name: data.name,
+  //   //   email: data.email,
+  //   //   age: data.age,
+  //   //   password: data.password,
+  //   //   cellphone: data.cellphone,
+  //   //   url: data.url,
+  //   // };
+  //   modifyUser(data);
+  // };
 
   function toDeleteUser() {
     deleteUser();
@@ -70,6 +78,7 @@ export default function ModalEdiProfile() {
 
   return (
     <div>
+
       <Dropdown placement="bottom-left">
         <DropdownTrigger>
           <AvatarDrop
@@ -112,7 +121,7 @@ export default function ModalEdiProfile() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmitEditModal)}>
+          <form onSubmit={handleSubmit(modifyUser)}>
             <DivModal>
               <Input
                 css={{
