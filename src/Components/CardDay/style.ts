@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const ContainerDay = styled.ul`
-  width: 16.5rem;
-  height: 25rem;
   margin: 0;
   display: flex;
   align-items: center;
@@ -10,6 +8,7 @@ export const ContainerDay = styled.ul`
   flex-direction: column;
   background-color: bisque;
   border-radius: 10px;
+  min-width: 200px;
   :hover {
     border: 1px solid blue;
   }
@@ -17,7 +16,7 @@ export const ContainerDay = styled.ul`
 
 export const ContainerOverFlow = styled.div`
   width: 90%;
-  height: 21rem;
+  height: 90%;
   max-height: 23rem;
   display: flex;
   align-items: center;

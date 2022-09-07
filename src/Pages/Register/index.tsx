@@ -82,7 +82,6 @@ const Register = () => {
       </Header>
       <Main>
         <DivImg>
-          {/* div form imagem*/}
           <img src={Yoga} alt="imagemRegister" />
         </DivImg>
 
