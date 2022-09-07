@@ -93,9 +93,6 @@ export const MainHeader = styled.div`
   }
 `;
 
-export const containerApp = styled.div`
-  /* width: ; */
-`;
 export const CardsContainer = styled.div`
   gap: 15px;
   display: -webkit-box;
