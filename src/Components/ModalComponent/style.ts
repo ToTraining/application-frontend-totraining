@@ -6,11 +6,10 @@ export const AddExerciseBtn = styled(Button)`
   border-radius: 8px;
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
   color: black;
-  margin-right: 1rem;
+
   /* width: 100px !important; */
 
   @media (min-width: 500px) {
-    margin-right: 3rem;
   }
 `;
 export const DivModal = styled.div`

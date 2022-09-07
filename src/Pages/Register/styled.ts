@@ -37,6 +37,7 @@ export const Main = styled.div`
     flex-direction: row;
     align-items: center;
     padding: 0;
+    padding-top: 100px;
   }
 `;
 
@@ -46,7 +47,19 @@ export const DivImg = styled.div`
   img {
     display: none;
   }
-  @media (min-width: 650px) {
+  @media (min-width: 650px) and (min-height: 750px) {
+    width: 50%;
+    display: flex;
+    align-items: center;
+
+    img {
+      display: flex;
+      align-items: center;
+      width: auto;
+      height: auto;
+    }
+  }
+  @media (min-height: 750px) {
     width: 50%;
     display: flex;
     align-items: center;

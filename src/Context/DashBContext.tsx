@@ -1,11 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { number } from "yup";
 import { api } from "../service/api";
 
 interface DashBContextProps {
-  oneWorkout: IWorkout;
+  oneWorkout: IWorkoutModify;
   userData: IUser;
   domingo: IWorkout[] | [];
   segunda: IWorkout[] | [];
@@ -17,7 +16,7 @@ interface DashBContextProps {
   addWorkout: (data: IWorkout) => void;
   modifyWorkout: (data: IExerciseModify) => void;
   deleteWorkout: (idWorkout: number) => void;
-  modifyUser: () => void;
+  modifyUser: (data: dataEditProf) => void;
   deleteUser: () => void;
   getWork: (idWorkout: number) => void;
 }
@@ -26,9 +25,13 @@ interface DashBProviderProps {
   children: ReactNode;
 }
 
-interface IUserData {
-  acessToken: string;
-  user: IUser;
+interface dataEditProf {
+  name: string;
+  email: string;
+  age: number;
+  password: string;
+  cellphone: number;
+  url: string;
 }
 
 interface IUser {
@@ -36,24 +39,10 @@ interface IUser {
   email: string;
   password: string;
   cellphone: string;
-  age: number;
+  age: string;
   url: string;
   confirmPassword: string;
   id: number;
-}
-
-interface IExercise {
-  name?: string;
-  rep?: string;
-  day?: string;
-  userId?: number;
-}
-
-interface IExerciseModify {
-  name?: string;
-  rep?: number;
-  day?: string;
-  userId?: number;
 }
 
 export const DashBContext = createContext<DashBContextProps>(
@@ -71,11 +60,22 @@ interface IWorkout {
   userId?: number;
 }
 
+interface IWorkoutModify {
+  title: string;
+  rep?: string;
+  time: string;
+  day?: string;
+  weigth: string;
+  set: string;
+  id: number;
+  userId?: number;
+}
+
 interface IExerciseModify {
   title: string;
-  rep?: number;
+  rep: number;
   time: number;
-  day?: string;
+  day: string;
   weigth: number;
   set: number;
   id: number;
@@ -87,8 +87,8 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   const userToken = localStorage.getItem("userToken");
   const id = Number(localStorage.getItem("userId"));
 
-  const [oneWorkout, setOneWorkout] = useState<IExerciseModify>(
-    {} as IExerciseModify
+  const [oneWorkout, setOneWorkout] = useState<IWorkoutModify>(
+    {} as IWorkoutModify
   );
 
   const [workouts, setWorkouts] = useState<IWorkout[]>([]);
@@ -110,22 +110,42 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
     setSexta(workouts.filter((elemento) => elemento.day === "sexta"));
     setSabado(workouts.filter((elemento) => elemento.day === "sabado"));
   }, [workouts]);
+  const notiFy = (message: string) =>
+    toast(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
-  const modifyUser = () => {
+  const navigate = useNavigate();
+
+  const modifyUser = (data: dataEditProf) => {
     api
-      .patch(`user/${id}`)
+      .patch(`users/${id}`, data)
       .then((resp) => {
         setUserData(resp.data);
+        notiFy("Usuário atulizado com sucesso!");
       })
       .catch((err) => {
+        notiFy("Erro ao atulizar usuário.");
         console.error(err);
       });
   };
 
   const deleteUser = () => {
-    api.delete(`/users/${id}`).catch((err) => {
-      console.error(err);
-    });
+    api
+      .delete(`/users/${id}`)
+      .then(() => {
+        notiFy("Usuário deletado com sucesso!");
+      })
+      .catch((err) => {
+        notiFy("Erro ao deletar usuário");
+        console.error(err);
+      });
   };
 
   async function getWorkouts() {
@@ -145,7 +165,6 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
 
   useEffect(() => {
     getWorkouts();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addWorkout = (data: IWorkout) => {
@@ -154,8 +173,10 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       .post("/workouts", data)
       .then((resp) => {
         getWorkouts();
+        notiFy("Exercício adicionado com sucesso!");
       })
       .catch((err) => {
+        notiFy("Erro ao adicionar exercício.");
         console.error(err);
       });
   };
@@ -176,8 +197,10 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       .patch(`/workouts/${oneWorkout.id}`, data)
       .then((resp) => {
         getWorkouts();
+        notiFy("Exercício atualizado com sucesso!");
       })
       .catch((err) => {
+        notiFy("Erro ao atualizar exercício");
         console.error(err);
       });
   };
@@ -185,24 +208,15 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   const deleteWorkout = (idWorkout: number) => {
     api
       .delete(`/workouts/${idWorkout}`)
-      .then((resp) => getWorkouts())
+      .then((resp) => {
+        getWorkouts();
+        notiFy("Exercício deletado com sucesso!");
+      })
       .catch((err) => {
+        notiFy("Erro ao deletar exercício.");
         console.error(err);
       });
   };
-
-  const notiFy = (message: string) =>
-    toast(message, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-
-  const navigate = useNavigate();
 
   return (
     <DashBContext.Provider

@@ -82,7 +82,6 @@ const Register = () => {
       </Header>
       <Main>
         <DivImg>
-          {/* div form imagem*/}
           <img src={Yoga} alt="imagemRegister" />
         </DivImg>
 
@@ -132,7 +131,7 @@ const Register = () => {
               <Input
                 css={{ width: "200px" }}
                 label=""
-                placeholder="URL"
+                placeholder="Imagem Url"
                 {...register("url")}
               />
               <span>{errors.url?.message}</span>

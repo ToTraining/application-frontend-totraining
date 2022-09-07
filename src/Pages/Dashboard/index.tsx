@@ -6,20 +6,6 @@ import { DashBContext } from "../../Context/DashBContext";
 import ModalEdiProfile from "./ModalHeader";
 import { CardDay } from "../../Components/CardDay";
 
-interface IUserData {
-  acessToken: string;
-  user: {
-    email: string;
-    password: string;
-    name: string;
-    cellphone: number;
-    age: number;
-    url: string;
-    confirmPassword: string;
-    id: number;
-  };
-}
-
 const Dashboard = () => {
   const { userData, domingo, segunda, terca, quarta, quinta, sexta, sabado } =
     useContext(DashBContext);
@@ -32,8 +18,10 @@ const Dashboard = () => {
         <ModalEdiProfile />
       </header>
       <MainHeader>
-        <h2>{userData.name}</h2>
-        <ModalExercises />
+        <div>
+          <h2>{userData.name}</h2>
+          <ModalExercises />
+        </div>
       </MainHeader>
       <main>
         <CardsContainer>

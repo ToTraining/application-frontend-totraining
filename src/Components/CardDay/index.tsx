@@ -21,7 +21,7 @@ export const CardDay = ({ titulo, workoutDay }: ITitleCard) => {
     <ContainerDay>
       <h3>{titulo}</h3>
       <ContainerOverFlow>
-        {workoutDay.map((elemento: any) => {
+        {workoutDay.map((elemento: IWorkout) => {
           return (
             <Exercise
               title={elemento.title}

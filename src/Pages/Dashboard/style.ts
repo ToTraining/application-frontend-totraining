@@ -49,18 +49,26 @@ export const MainHeader = styled.div`
   width: 100%;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   padding: 10px;
 
-  border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
+  padding-left: 5%;
+  padding-right: 5%;
 
+  border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
+  div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
   h2 {
     font-size: 1rem;
     color: black;
     font-weight: boldw;
-    margin-left: 1rem;
+
     margin-bottom: 0;
   }
   @media (min-width: 500px) {
@@ -68,7 +76,7 @@ export const MainHeader = styled.div`
       font-size: 1rem;
       color: black;
       font-weight: boldw;
-      margin-left: 4rem;
+
       margin-bottom: 0;
     }
   }
@@ -82,11 +90,16 @@ export const CardsContainer = styled.div`
   scrollbar-color: #0077b6;
   width: 90%;
   margin: 0;
+  margin-top: 20px;
+  height: 70vh;
+
+  display: flex;
+  justify-content: space-between;
+
   ul {
     display: flex;
-    justify-content: center;
-    height: 400px;
-    width: 200px;
+
+    width: 500px;
     background-color: #0077b6;
     border-radius: 8px;
     margin-bottom: 5px;

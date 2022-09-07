@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
-
-import { AddExerciseBtn, DivModal, SelectDay, SelectExercises } from "./style";
+import { AddExerciseBtn, DivModal, SelectDay } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -18,14 +17,7 @@ export default function ModalExercises() {
     // console.log("closed");
   };
 
-  const schema = yup.object().shape({
-    // exercise: yup.string().required(),
-    // repetition: yup.number().required(),
-    // series: yup.number().required(),
-    // weigth: yup.number().required(),
-    // restTime: yup.number().required(),
-    // day: yup.string().required(),
-  });
+  const schema = yup.object().shape({});
 
   interface IWorkout {
     title: string;
