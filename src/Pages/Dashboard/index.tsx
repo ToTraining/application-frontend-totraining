@@ -5,6 +5,7 @@ import { Body, MainHeader } from "./style";
 import logo from "../../assets/logo.png";
 import { DashBContext } from "../../Context/DashBContext";
 import ModalEdiProfile from "./ModalHeader";
+import { CardDay } from "../../Components/CardDay";
 
 interface IUserData {
   acessToken: string;
@@ -21,8 +22,8 @@ interface IUserData {
 }
 
 const Dashboard = () => {
-  const { getUserData, userData } = useContext(DashBContext);
-  console.log(userData);
+  const { userData, domingo, segunda, terca, quarta, quinta, sexta, sabado } =
+    useContext(DashBContext);
 
   return (
     <Body>
@@ -31,13 +32,18 @@ const Dashboard = () => {
 
         <ModalEdiProfile />
       </header>
+      <div>
+        <h2>{userData.name}</h2>
+        <ModalExercises />
+      </div>
       <main>
-        <MainHeader>
-          <h2>{"userData.user.name"}</h2>
-          <ModalExercises />
-        </MainHeader>
-
-        <CardDashboard />
+        <CardDay titulo="Domingo" workoutDay={domingo} />
+        <CardDay titulo="Segunda-feira" workoutDay={segunda} />
+        <CardDay titulo="Terça-feira" workoutDay={terca} />
+        <CardDay titulo="Quarta-feira" workoutDay={quarta} />
+        <CardDay titulo="Quinta-feira" workoutDay={quinta} />
+        <CardDay titulo="Sexta-feira" workoutDay={sexta} />
+        <CardDay titulo="Sábado" workoutDay={sabado} />
       </main>
     </Body>
   );

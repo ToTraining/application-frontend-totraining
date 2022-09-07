@@ -1,18 +1,25 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { number } from "yup";
 import { api } from "../service/api";
 
 interface DashBContextProps {
-  getUserData: (data: "Tipagem") => void;
-  userData: IUserData | undefined;
-  modifyUser: Function;
-  deleteUser: Function;
-  deleteWorkout: Function;
-  modifyWorkout: Function;
-  addWorkout: Function;
-
+  userData: IUser;
+  domingo: IWorkout[] | [];
+  segunda: IWorkout[] | [];
+  terca: IWorkout[] | [];
+  quarta: IWorkout[] | [];
+  quinta: IWorkout[] | [];
+  sexta: IWorkout[] | [];
+  sabado: IWorkout[] | [];
+  addWorkout: (data: IWorkout) => void;
+  modifyWorkout: (data: IExerciseModify) => void;
+  deleteWorkout: (idWorkout: number) => void;
+  modifyUser: () => void;
+  deleteUser: () => void;
+  getWork: (idWorkout: number) => void;
+  oneWorkout: IWorkout;
 }
 
 interface DashBProviderProps {
@@ -21,17 +28,18 @@ interface DashBProviderProps {
 
 interface IUserData {
   acessToken: string;
-  user: {
+  user: IUser;
+}
 
-    email: string;
-    password: string;
-    name: string;
-    cellphone: number;
-    age: number;
-    url: string;
-    confirmPassword: string;
-    id: number;
-  };
+interface IUser {
+  name: string;
+  email: string;
+  password: string;
+  cellphone: string;
+  age: number;
+  url: string;
+  confirmPassword: string;
+  id: number;
 }
 
 interface IExercise {
@@ -52,20 +60,46 @@ export const DashBContext = createContext<DashBContextProps>(
   {} as DashBContextProps
 );
 
+interface IWorkout {
+  title: string;
+  rep: number;
+  time: number;
+  day: string;
+  weigth: number;
+  set: number;
+  id: number;
+  userId?: number;
+}
+
+interface IExerciseModify {
+  title: string;
+  rep: number;
+  time: number;
+  day: string;
+  weigth: number;
+  set: number;
+  id: number;
+  userId?: number;
+}
+
 const DashBProvider = ({ children }: DashBProviderProps) => {
-  const [userData, setUserData] = useState<IUserData>();
-  const userToken = localStorage.getItem("userToken")!;
-  const id = Number(localStorage.getItem("userId"))!;
+  const [userData, setUserData] = useState<IUser>({} as IUser);
+  const userToken = localStorage.getItem("userToken");
+  const id = Number(localStorage.getItem("userId"));
 
-  const [workouts, setWorkouts] = useState<IExercise[]>([]);
+  const [oneWorkout, setOneWorkout] = useState<IExerciseModify>(
+    {} as IExerciseModify
+  );
 
-  const [domingo, setDomingo] = useState<IExercise[]>([]);
-  const [segunda, setSegunda] = useState<IExercise[]>([]);
-  const [terca, setTerca] = useState<IExercise[]>([]);
-  const [quarta, setQuarta] = useState<IExercise[]>([]);
-  const [quinta, setQuinta] = useState<IExercise[]>([]);
-  const [sexta, setSexta] = useState<IExercise[]>([]);
-  const [sabado, setSabado] = useState<IExercise[]>([]);
+  const [workouts, setWorkouts] = useState<IWorkout[]>([]);
+
+  const [domingo, setDomingo] = useState<IWorkout[]>([]);
+  const [segunda, setSegunda] = useState<IWorkout[]>([]);
+  const [terca, setTerca] = useState<IWorkout[]>([]);
+  const [quarta, setQuarta] = useState<IWorkout[]>([]);
+  const [quinta, setQuinta] = useState<IWorkout[]>([]);
+  const [sexta, setSexta] = useState<IWorkout[]>([]);
+  const [sabado, setSabado] = useState<IWorkout[]>([]);
 
   useEffect(() => {
     setDomingo(workouts.filter((elemento) => elemento.day === "domingo"));
@@ -77,40 +111,10 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
     setSabado(workouts.filter((elemento) => elemento.day === "sabado"));
   }, [workouts]);
 
-  // const onSubmitEditModal = (data: any) => {
-  //   const dataEditProfile = {
-  //     name: data.name,
-  //     email: data.email,
-  //     age: data.age,
-  //     password: data.password,
-  //     cellphone: data.cellphone,
-  //     url: data.url,
-  //   };
-  //   modifyUser(dataEditProfile)
-  //   console.log(dataEditProfile);
-  // };
-
-  // const newUserData = {
-  //   name: "Joao",
-  //   email: "joao@mail.com",
-  //   age: 50,
-  //   password: "Teste123@",
-  //   cellphone: 988887777,
-  //   url: "www.imagem.com"
-  // }
-
-  const modifyUser = (dataEditProfile: any) => {
-    const token = localStorage.getItem("userToken");
+  const modifyUser = () => {
     api
-      .patch(`users/${id}`, dataEditProfile
-      , {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-      )
+      .patch(`user/${id}`)
       .then((resp) => {
-        console.log(resp.data);
         setUserData(resp.data);
       })
       .catch((err) => {
@@ -119,61 +123,69 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   };
 
   const deleteUser = () => {
-    const token = localStorage.getItem("userToken");
-    api.delete(`/users/${id}`, {
-      headers:{
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .catch((err) => {
+    api.delete(`/users/${id}`).catch((err) => {
       console.error(err);
     });
   };
 
-  const getWorkouts = (id: number) => {
-    api
-      .get(`/users/${id}?_embed=workouts`)
-      .then((resp) => {
-        setWorkouts(resp.data.workouts);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  async function getWorkouts() {
+    if (userToken) {
+      try {
+        api.defaults.headers.common["Authorization"] = `Bearer ${userToken}`;
+        const { data } = await api.get(`/users/${id}?_embed=workouts`);
+        setWorkouts(data.workouts);
+        setUserData(data);
+      } catch (error) {
+        localStorage.clear();
+      }
+    } else {
+      navigate("/", { replace: true });
+    }
+  }
 
   useEffect(() => {
-    getWorkouts(id);
+    getWorkouts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const addWorkout = (data: IExercise) => {
+  const addWorkout = (data: IWorkout) => {
     data.userId = id;
     api
       .post("/workouts", data)
       .then((resp) => {
-        getWorkouts(id);
+        getWorkouts();
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const modifyWorkout = (idWorkout: number, data: IExerciseModify) => {
-    data.userId = id;
+  const getWork = (idWorkout: number) => {
     api
-      .patch(`/workouts/${idWorkout}`, data)
+      .get(`/workouts/${idWorkout}`)
       .then((resp) => {
-        getWorkouts(id);
+        setOneWorkout(resp.data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const deleteWorkout = (idWorkout: string) => {
-    /* const filtered = workouts.filter((toRemove) => toRemove.id !== idToRemove)*/
+  const modifyWorkout = (data: IExerciseModify) => {
+    api
+      .patch(`/workouts/${oneWorkout.id}`, data)
+      .then((resp) => {
+        getWorkouts();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const deleteWorkout = (idWorkout: number) => {
     api
       .delete(`/workouts/${idWorkout}`)
-      .then((resp) => getWorkouts(id))
+      .then((resp) => getWorkouts())
       .catch((err) => {
         console.error(err);
       });
@@ -189,38 +201,27 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       draggable: true,
       progress: undefined,
     });
+
   const navigate = useNavigate();
-  const getUserData = (id: string) => {
-    if (userToken) {
-      api
-        .get("/users/" + id)
-        .then((response) => {
-          setUserData(response.data);
-
-          navigate("/dashboard");
-          console.log(response);
-        })
-        .catch((err) => {
-          localStorage.clear();
-        });
-    } else {
-      navigate("/");
-    }
-  };
-
-  /// Auto Login aqui
 
   return (
     <DashBContext.Provider
       value={{
-        getUserData,
         userData,
+        domingo,
+        segunda,
+        terca,
+        quarta,
+        quinta,
+        sexta,
+        sabado,
+        addWorkout,
+        modifyWorkout,
+        deleteWorkout,
         modifyUser,
         deleteUser,
-        deleteWorkout,
-        modifyWorkout,
-        addWorkout,
-        
+        oneWorkout,
+        getWork,
       }}
     >
       {children}

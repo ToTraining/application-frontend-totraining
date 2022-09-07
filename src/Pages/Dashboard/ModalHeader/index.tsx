@@ -16,7 +16,16 @@ import axios from "axios";
 import { api } from "../../../service/api";
 import { Dropdown, Avatar, Text, Grid, User, Button } from "@nextui-org/react";
 
-export default function ModalEdiProfile() {
+interface DataEditProf {
+  name: string;
+  email: string;
+  age: number;
+  password: string;
+  cellphone: number;
+  url: string;
+}
+
+export default function ModalEditProfile() {
   const [visible, setVisible] = React.useState(false);
   const handler = () => setVisible(true);
   const { modifyUser, deleteUser } = useContext(DashBContext);
@@ -37,18 +46,17 @@ export default function ModalEdiProfile() {
     // day: yup.string().required(),
   });
 
-  const onSubmitEditModal = (data: any) => {
-    const dataEditProfile = {
-      name: data.name,
-      email: data.email,
-      age: data.age,
-      password: data.password,
-      cellphone: data.cellphone,
-      url: data.url,
-    };
-    modifyUser(dataEditProfile);
-    console.log(dataEditProfile);
-  };
+  // const onSubmitEditModal = (data: DataEditProf) => {
+  //   // const dataEditProfile = {
+  //   //   name: data.name,
+  //   //   email: data.email,
+  //   //   age: data.age,
+  //   //   password: data.password,
+  //   //   cellphone: data.cellphone,
+  //   //   url: data.url,
+  //   // };
+  //   modifyUser(data);
+  // };
 
   function toDeleteUser() {
     deleteUser();
@@ -78,7 +86,7 @@ export default function ModalEdiProfile() {
                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
               />
             </Dropdown.Trigger>
-            <Dropdown.Menu css={{ maxWidth: "200px" }}>
+            <Dropdown.Menu>
               <Dropdown.Item css={{ width: "200px" }}>
                 <ButtonUserMenu onClick={handler}>Editar Perfil</ButtonUserMenu>
               </Dropdown.Item>
@@ -114,7 +122,7 @@ export default function ModalEdiProfile() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(onSubmitEditModal)}>
+          <form onSubmit={handleSubmit(modifyUser)}>
             <DivModal>
               <Input
                 css={{

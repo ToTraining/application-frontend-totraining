@@ -15,20 +15,14 @@ export const SelectDay = styled.select`
   border-radius: 8px;
 `;
 
-
-
 export const ButtonUserMenu = styled(Button)`
-background-color: transparent;
-width: 200px;
-color: black;
-text-align: center;
-
-`
+  background-color: transparent;
+  width: 200px;
+  color: black;
+`;
 export const ButtonUserMenuLogout = styled(Button)`
-background-color: transparent;
-width: 200px;
-color: red;
-text-align: center;
-
-
-`
+  background-color: transparent;
+  width: 200px;
+  color: red;
+  text-align: center;
+`;
