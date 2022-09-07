@@ -17,8 +17,8 @@ export const Body = styled.div`
     align-items: center;
     padding-top: 10px;
     padding-bottom: 5px;
-    padding-left: 2em;
-    padding-right: 2em;
+    padding-left: 4em;
+    padding-right: 4em;
 
     border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
     margin-bottom: 5px;
