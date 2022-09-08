@@ -19,6 +19,9 @@ interface DashBContextProps {
   modifyUser: (data: dataEditProf) => void;
   deleteUser: () => void;
   getWork: (idWorkout: number) => void;
+  visible: boolean;
+  handler: () => void;
+  closeHandler: () => void;
 }
 
 interface DashBProviderProps {
@@ -101,6 +104,14 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
   const [sexta, setSexta] = useState<IWorkout[]>([]);
   const [sabado, setSabado] = useState<IWorkout[]>([]);
 
+  //fechar o modal
+  const [visible, setVisible] = useState(false)
+  const handler = () => setVisible(true)
+  const closeHandler = () => {
+      setVisible(false)
+      console.log("fechou")
+  }
+
   useEffect(() => {
     setDomingo(workouts.filter((elemento) => elemento.day === "domingo"));
     setSegunda(workouts.filter((elemento) => elemento.day === "segunda"));
@@ -129,6 +140,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       .then((resp) => {
         setUserData(resp.data);
         notiFy("Usuário atulizado com sucesso!");
+        closeHandler()
       })
       .catch((err) => {
         notiFy("Erro ao atulizar usuário.");
@@ -197,6 +209,7 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
       .patch(`/workouts/${oneWorkout.id}`, data)
       .then((resp) => {
         getWorkouts();
+        closeHandler()
         notiFy("Exercício atualizado com sucesso!");
       })
       .catch((err) => {
@@ -236,6 +249,9 @@ const DashBProvider = ({ children }: DashBProviderProps) => {
         modifyUser,
         deleteUser,
         getWork,
+        closeHandler,
+        visible,
+        handler
       }}
     >
       {children}

@@ -47,7 +47,6 @@ export const Body = styled.div`
 
 export const MainHeader = styled.div`
   width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,40 +57,52 @@ export const MainHeader = styled.div`
   padding-right: 5%;
 
   border-bottom: solid rgba(0, 0, 0, 0.2) 2px;
-  div {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  h2 {
-    font-size: 1rem;
+
+  p {
     color: black;
-    font-weight: bold;
-
-    margin-bottom: 0;
+    font-size: large;
+    font-weight: 700;
   }
-  @media (min-width: 500px) {
-    h2 {
-      font-size: 1rem;
-      color: black;
-      font-weight: boldw;
 
-      margin-bottom: 0;
+  @media (min-width: 400px) {
+    p {
+      width: 15rem;
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 760px) {
+    height: 6rem;
+
+    p {
+      width: 20rem;
+      font-size: 20px;
+    }
+  }
+
+  @media (min-width: 760px) {
+    p {
+      width: 70%;
+      font-size: 28px;
     }
   }
 `;
+
+export const UserContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
 
 export const CardsContainer = styled.div`
   gap: 15px;
   display: -webkit-box;
   flex-direction: row;
   overflow-x: scroll;
-  scrollbar-color: #0077b6;
   width: 90%;
   margin: 0;
   margin-top: 20px;
-  height: 70vh;
 
   display: flex;
   justify-content: space-between;

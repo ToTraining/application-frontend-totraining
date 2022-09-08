@@ -6,21 +6,24 @@ export const ContainerDay = styled.ul`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: bisque;
+  background-color: #0077b6;
   border-radius: 10px;
-  min-width: 200px;
-  :hover {
-    border: 1px solid blue;
+  min-width: 17rem;
+  color: white;
+
+  h3{
+    font-weight: 600;
   }
+
 `;
 
 export const ContainerOverFlow = styled.div`
   width: 90%;
-  height: 90%;
-  max-height: 23rem;
+  height: 36rem;
+  max-height: 37rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
   overflow-x: hidden;
 `;

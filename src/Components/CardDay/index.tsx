@@ -21,20 +21,20 @@ export const CardDay = ({ titulo, workoutDay }: ITitleCard) => {
     <ContainerDay>
       <h3>{titulo}</h3>
       <ContainerOverFlow>
-        {workoutDay.map((elemento: IWorkout) => {
+        {workoutDay.map((elemento : IWorkout) => {
           return (
             <Exercise
-              title={elemento.title}
-              rep={elemento.rep}
-              time={elemento.time}
-              day={elemento.day}
-              weigth={elemento.weigth}
-              set={elemento.set}
-              id={elemento.id}
-              key={elemento.id}
+            title={elemento.title}
+            rep={elemento.rep}
+            time={elemento.time}
+            day={elemento.day}
+            weigth={elemento.weigth}
+            set={elemento.set}
+            id={elemento.id}
+            key={elemento.id}
             />
-          );
-        })}
+            );
+          })}
       </ContainerOverFlow>
     </ContainerDay>
   );

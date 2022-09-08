@@ -84,13 +84,15 @@ const Register = () => {
       transition={{ duration: 0.3 }}
     >
       <>
-        <Header>
-          <img src={LogoTipo} alt="Logotipo" />
-        </Header>
-        <Main>
-          <DivImg>
-            <img src={Yoga} alt="imagemRegister" />
-          </DivImg>
+           <Header>
+        <h1>toTraining</h1>
+        {/* <img src={LogoTipo} alt="Logotipo" /> */}
+      </Header>
+      <Main>
+        <DivImg>
+          <h1>toTraining</h1>
+          <img src={Yoga} alt="imagemRegister" />
+        </DivImg>
 
           <DivForm>
             <form

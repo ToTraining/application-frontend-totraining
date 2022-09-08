@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "../service/api";
 
 interface LoginContextProps {
-  toLogin: (data: IForm) => void;
+  toLogin: Function;
   navigate: NavigateFunction;
 }
 
@@ -43,8 +43,8 @@ const LoginProvider = ({ children }: LoginProviderProps) => {
         navigate("/dashboard");
       })
       .catch((err) => {
-        notiFy("Erro ao efetuar login.");
-        console.error(err);
+        notiFy("O login não foi bem sucedido!");
+        console.log(err);
       });
   };
 

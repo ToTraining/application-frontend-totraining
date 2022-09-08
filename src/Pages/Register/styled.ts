@@ -1,22 +1,17 @@
 import { Button } from "@nextui-org/react";
 import styled from "styled-components";
 export const Header = styled.div`
-  height: 57px;
+    height: 57px;
   width: 100vw;
-
-  background: #091025;
+  background-color: #091025;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin: 0;
-  img {
-    width: 150px;
-  }
+  
   @media (min-width: 650px) {
-    justify-content: flex-start;
-    padding-left: 20px;
+    display: none;
   }
 `;
 export const Main = styled.div`
@@ -47,26 +42,15 @@ export const DivImg = styled.div`
   img {
     display: none;
   }
-  @media (min-width: 650px) and (min-height: 750px) {
+  @media (min-width: 650px) {
     width: 50%;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 
     img {
-      display: flex;
-      align-items: center;
-      width: auto;
-      height: auto;
-    }
-  }
-  @media (min-height: 750px) {
-    width: 50%;
-    display: flex;
-    align-items: center;
-
-    img {
-      display: flex;
-      align-items: center;
+      display: block;
       width: auto;
       height: auto;
     }
@@ -75,12 +59,11 @@ export const DivImg = styled.div`
 export const DivForm = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   flex-direction: column;
   width: 16rem;
   height: 47.688rem;
   margin: 0;
-  margin-left: 25px;
 `;
 export const DivFormTitulo = styled.div`
   color: white;
@@ -113,10 +96,10 @@ export const DivMain = styled.div`
 
 export const BtnDiv = styled.div`
   display: flex;
+  height: 10rem;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding-top: 0.5rem;
+  justify-content: space-around;
 `;
 
 export const BtnCadastrar = styled(Button)`

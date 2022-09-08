@@ -47,13 +47,15 @@ const Login = () => {
       transition={{ duration: 0.3 }}
     >
       <>
-        <Header>
-          <img src={LogoTipo} alt="Logotipo" />
-        </Header>
-        <Main>
-          <DivImg>
-            <img src={Pilates} alt="imagemLogin" />
-          </DivImg>
+          <Header>
+        <h1>toTraining</h1>
+        {/* <img src={LogoTipo} alt="Logotipo" /> */}
+      </Header>
+      <Main>
+        <DivImg>
+          <h1>toTraining</h1>
+          <img src={Pilates} alt="imagemLogin" />
+        </DivImg>
 
           <DivForm>
             <form

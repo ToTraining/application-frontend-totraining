@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
-import { AddExerciseBtn, DivModal, SelectDay } from "./style";
+import {  DivModal, SelectDay } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -37,12 +37,12 @@ export default function ModalExercises() {
 
   return (
     <div>
-      <AddExerciseBtn size={"xs"} onClick={handler}>
-        Adicionar Exercício +
-      </AddExerciseBtn>
+      <Button color="gradient" size={"sm"} onClick={handler}>
+        Adicionar Exercício 
+      </Button>
 
       <Modal
-        css={{ backgroundColor: "#00224e" }}
+        css={{ backgroundColor: "#00224e", height:"21rem" }}
         closeButton
         aria-labelledby="modal-title"
         open={visible}
@@ -140,9 +140,10 @@ export default function ModalExercises() {
                 color={"gradient"}
                 css={{
                   width: "49%",
+                  backgroundColor: "#C9CEFC"
                 }}
-                type="submit"
                 auto
+                type="submit"
               >
                 Adicionar a lista
               </Button>

@@ -4,20 +4,15 @@ import styled from "styled-components";
 export const Header = styled.div`
   height: 57px;
   width: 100vw;
-
-  background: #091025;
+  background-color: #091025;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin: 0;
-  img {
-    width: 150px;
-  }
+  
   @media (min-width: 650px) {
-    justify-content: flex-start;
-    padding-left: 20px;
+    display: none;
   }
 `;
 export const Main = styled.div`
@@ -50,6 +45,8 @@ export const DivImg = styled.div`
     width: 50%;
     display: flex;
     align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
 
     img {
       display: block;

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { DashBContext } from "../../Context/DashBContext";
-import { ModalEditWorkout } from "../ModalEditWorkout";
+import  ModalEditWorkout  from "../ModalEditWorkout/index"
 import { BsFillTrashFill } from "react-icons/bs";
 import {
   ButtonDelet,
@@ -36,13 +36,13 @@ export const Exercise = ({
         <h4>{title}</h4>
         <ContainerInfoWorkout>
           <p>{rep} reps</p>
+          <p>{weigth} Kg</p>
           <p>{set} sets</p>
           <p>{time} min</p>
-          <p>{weigth} Kg</p>
         </ContainerInfoWorkout>
       </div>
       <ContainerButtons>
-        <ModalEditWorkout id={id} />
+        <ModalEditWorkout id={id}/>
         <ButtonDelet onClick={() => deleteWorkout(id)}>
           <BsFillTrashFill />
         </ButtonDelet>

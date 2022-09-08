@@ -2,7 +2,6 @@ import {
   Avatar,
   Button,
   Dropdown,
-  StyledDropdownMenu,
 } from "@nextui-org/react";
 import styled from "styled-components";
 
@@ -35,31 +34,22 @@ export const ButtonUserMenuLogout = styled(Button)`
 
 `;
 export const MenuDropdown = styled(Dropdown.Menu)`
-
-
   min-width: 10px;
-
-  
-
 `;
-export const DropdownItem = styled(Dropdown.Item)`
 
+export const DropdownItem = styled(Dropdown.Item)`
   background-color: white !important;
   height: 1px;
-
-
 `;
 
 export const AvatarDrop = styled(Avatar)`
 
     img {
       @media (min-width: 150px) {
-      
-    margin-right: 16px;
-
+        margin-right: 16px;
       }
       @media (min-width: 500px) {
-        margin-right: -1px;
+        margin-right: 0;
       }
     }
 `;

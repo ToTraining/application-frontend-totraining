@@ -2,21 +2,15 @@ import styled from "styled-components";
 
 export const ContainerWorkout = styled.li`
   width: 95%;
-  /* min-height: 5rem;
-  max-height: 10rem; */
-  height: fit-content;
+  height: 7.5rem;
   background-color: white;
   border-radius: 8px;
-
   margin: 0;
-
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
-
   padding: 5px;
   padding-left: 0.6rem;
-
   div {
     display: flex;
     flex-direction: column;

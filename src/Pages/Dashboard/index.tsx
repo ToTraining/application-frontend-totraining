@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ModalExercises from "../../Components/ModalComponent/ModalExercises";
-import { Body, CardsContainer, MainHeader } from "./style";
+import { Body, CardsContainer, MainHeader, UserContainer } from "./style";
 import logo from "../../assets/logo.png";
 import { DashBContext } from "../../Context/DashBContext";
 import ModalEdiProfile from "./ModalHeader";
@@ -25,10 +25,10 @@ const Dashboard = () => {
           <ModalEdiProfile />
         </header>
         <MainHeader>
-          <div>
-            <h2>{userData.name}</h2>
-            <ModalExercises />
-          </div>
+          <UserContainer>
+           <p>Bora treinar hoje, {userData.name}?</p>
+          <ModalExercises />
+        </UserContainer>
         </MainHeader>
         <main>
           <CardsContainer>

@@ -1,4 +1,4 @@
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext } from "react";
 import { Modal, Input } from "@nextui-org/react";
 import {
   ButtonUserMenu,
@@ -15,7 +15,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { DashBContext } from "../../../Context/DashBContext";
-import { Dropdown, Avatar, Text, Grid, User, Button } from "@nextui-org/react";
+import { Text, Button } from "@nextui-org/react";
 
 interface dataEditProf {
   name: string;
@@ -64,7 +64,7 @@ export default function ModalEditProfile() {
     <div>
       <DropdownContainer placement="bottom-left">
         <DropdownTrigger>
-          <AvatarDrop bordered size="lg" color="secondary" src={userData.url} />
+          <AvatarDrop squared bordered size="xl" color="gradient" src={userData.url} />
         </DropdownTrigger>
         <MenuDropdown variant="light">
           <DropdownItem>
@@ -80,14 +80,14 @@ export default function ModalEditProfile() {
       </DropdownContainer>
 
       <Modal
-        css={{ backgroundColor: "#00224e" }}
+        css={{ backgroundColor: "#00224e", height: "21rem" }}
         closeButton
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}
       >
         <Modal.Header>
-          <Text id="modal-title" size={18} css={{ color: "white" }}>
+          <Text id="modal-title" b size={19} css={{ color: "white" }}>
             Editar Perfil
           </Text>
         </Modal.Header>
@@ -102,10 +102,10 @@ export default function ModalEditProfile() {
               <Input
                 css={{
                   backgroundColor: "#fff",
-                  width: "49%",
                   marginTop: "8px",
                   marginBottom: "8px",
                 }}
+                fullWidth
                 {...register("name")}
                 initialValue={userData.name}
                 clearable
@@ -148,20 +148,6 @@ export default function ModalEditProfile() {
                 aria-label="Idade"
                 placeholder="Idade"
               />
-              {/*               <Input
-                css={{
-                  backgroundColor: "#fff",
-                  width: "49%",
-                  marginTop: "8px",
-                  marginBottom: "8px",
-                }}
-                {...register("password")}
-                clearable
-                color="primary"
-                size="lg"
-                aria-label="Senha"
-                placeholder="Senha"
-              /> */}
             </DivModal>
 
             <DivModal>
@@ -199,24 +185,23 @@ export default function ModalEditProfile() {
             </DivModal>
 
             <DivModal>
-              <Button
-                color={"gradient"}
+              <Button   
                 css={{
                   width: "49%",
                 }}
-                onClick={toDeleteUser}
                 auto
-              >
+                 color="error" onClick={toDeleteUser} >
+
                 Excluir perfil
+              
               </Button>
-              <Button
-                color={"gradient"}
+              <Button 
                 css={{
                   width: "49%",
                 }}
-                type="submit"
                 auto
-              >
+                color="gradient" type="submit" >
+
                 Atualizar perfil
               </Button>
             </DivModal>
