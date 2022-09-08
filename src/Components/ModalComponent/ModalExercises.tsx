@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Modal, Button, Text, Input } from "@nextui-org/react";
-import { DivModal, SelectDay } from "./style";
+import {  DivModal, SelectDay } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { DashBContext } from "../../../Context/DashBContext";
+import { DashBContext } from "../../Context/DashBContext";
 
 export default function ModalExercises() {
   const [visible, setVisible] = useState(false);
@@ -14,29 +14,9 @@ export default function ModalExercises() {
 
   const closeHandler = () => {
     setVisible(false);
-    // console.log("closed");
   };
 
-  const schema = yup.object().shape({
-    // exercise: yup.string().required(),
-    // repetition: yup.number().required(),
-    // series: yup.number().required(),
-    // weigth: yup.number().required(),
-    // restTime: yup.number().required(),
-    // day: yup.string().required(),
-  });
-  /* 
-  const onSubmitModal = (data: any) => {
-    const newExercise = {
-      exercise: data.exercise,
-      repetition: data.repetition,
-      series: data.series,
-      weight: data.weight,
-      restTime: data.restTime,
-      day: data.day,
-    };
-    console.log(newExercise);
-  }; */
+  const schema = yup.object().shape({});
 
   interface IWorkout {
     title: string;
@@ -57,12 +37,12 @@ export default function ModalExercises() {
 
   return (
     <div>
-      <Button auto shadow onClick={handler}>
-        Adicionar Exercício +
+      <Button color="gradient" size={"sm"} onClick={handler}>
+        Adicionar Exercício 
       </Button>
 
       <Modal
-        css={{ backgroundColor: "#00224e" }}
+        css={{ backgroundColor: "#00224e", height:"21rem" }}
         closeButton
         aria-labelledby="modal-title"
         open={visible}
@@ -75,18 +55,18 @@ export default function ModalExercises() {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit(addWorkout)}>
-              <Input
-                css={{
-                  backgroundColor: "#fff",
-                  marginTop: "8px",
-                  marginBottom: "8px",
-                }}
-                {...register("title")}
-                clearable
-                fullWidth
-                size="lg"
-                placeholder="Nome"
-                />
+            <Input
+              css={{
+                backgroundColor: "#fff",
+                marginTop: "8px",
+                marginBottom: "8px",
+              }}
+              {...register("title")}
+              clearable
+              fullWidth
+              size="lg"
+              placeholder="Nome"
+            />
             <DivModal>
               <Input
                 css={{
@@ -152,10 +132,14 @@ export default function ModalExercises() {
                 <option value="sabado">Sábado</option>
               </SelectDay>
 
-              <Button css={{
-                  backgroundColor: "#C9CEFC",
+              <Button
+                css={{
                   width: "49%",
-                }} type="submit" auto>
+                  backgroundColor: "#C9CEFC"
+                }}
+                auto
+                type="submit"
+              >
                 Adicionar a lista
               </Button>
             </DivModal>

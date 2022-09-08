@@ -1,18 +1,26 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import LogoTipo from "../../assets/LogoTipo.png";
+
 import * as React from "react";
 import { Input, Button } from "@nextui-org/react";
 import { useContext } from "react";
 import { RegisterContext } from "../../Context/RegisterContext";
 import {
-  ContainerRegister,
-  DivFormImg,
+  DivImg,
   DivForm,
-  DivFormHeader,
+  Header,
   DivFormTitulo,
-  DivFormInputs,
+  BtnDiv,
+  DivMain,
+  Main,
+  BtnCadastrar,
 } from "./styled";
+import Yoga from "../../assets/yoga.png";
+
+import "react-toastify/dist/ReactToastify.css";
+
 interface IForm {
   name: string;
   email: string;
@@ -41,10 +49,10 @@ const Register = () => {
     cellphone: yup
       .string()
       .typeError("Telefone inválido")
-      .matches(
-        /^([1-9]{2})(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
-        "Telefone Inválido"
-      )
+      // .matches(
+      //   /^([1-9]{2}) (?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}/,
+      //   "Telefone Inválido"
+      // )
       .min(8)
       .required("Telefone obrigatório"),
     age: yup.string().required("Idade obrigatório"),
@@ -69,80 +77,105 @@ const Register = () => {
 
   return (
     <>
-      <ContainerRegister>
-        <DivFormImg>
-          {/* div form imagem*/}
-          <img
-            src="https://saude.abril.com.br/wp-content/uploads/2019/11/atividade-fisica.png?quality=85&strip=info&resize=850,567"
-            alt="imagemLogin"
-          />
-        </DivFormImg>
+      <Header>
+        <h1>toTraining</h1>
+        {/* <img src={LogoTipo} alt="Logotipo" /> */}
+      </Header>
+      <Main>
+        <DivImg>
+          <h1>toTraining</h1>
+          <img src={Yoga} alt="imagemRegister" />
+        </DivImg>
+
         <DivForm>
           <form
             onSubmit={handleSubmit(async (data) => {
               await toRegister(data);
             })}
           >
-            <div>
-              <DivFormHeader>
-                <p>toTraining</p>
-              </DivFormHeader>
-              <DivFormInputs>
-                <DivFormTitulo>
-                  <h1>Registro</h1>
-                </DivFormTitulo>
+            <DivMain>
+              <DivFormTitulo>
+                <h1>Registro</h1>
+              </DivFormTitulo>
 
-                <Input label="Nome" placeholder="Nome" {...register("name")} />
-                <span>{errors.name?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Nome"
+                {...register("name")}
+              />
+              <span>{errors.name?.message}</span>
 
-                <Input
-                  label="E-mail"
-                  placeholder="E-mail"
-                  {...register("email")}
-                />
-                <span>{errors.email?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="E-mail"
+                {...register("email")}
+              />
+              <span>{errors.email?.message}</span>
 
-                <Input
-                  label="Telefone"
-                  placeholder="Telefone"
-                  {...register("cellphone")}
-                />
-                <span>{errors.cellphone?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Telefone"
+                {...register("cellphone")}
+              />
+              <span>{errors.cellphone?.message}</span>
 
-                <Input label="Idade" placeholder="Idade" {...register("age")} />
-                <span>{errors.age?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Idade"
+                {...register("age")}
+              />
+              <span>{errors.age?.message}</span>
 
-                <Input label="URL" placeholder="URL" {...register("url")} />
-                <span>{errors.url?.message}</span>
+              <Input
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Imagem Url"
+                {...register("url")}
+              />
+              <span>{errors.url?.message}</span>
 
-                <Input.Password
-                  label="Senha"
-                  placeholder="Password"
-                  initialValue=""
-                  {...register("password")}
-                />
-                <span>{errors.password?.message}</span>
+              <Input.Password
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Password"
+                initialValue=""
+                {...register("password")}
+              />
+              <span>{errors.password?.message}</span>
 
-                <Input.Password
-                  label="Confirmação de senha"
-                  placeholder="Confirmação de senha"
-                  {...register("confirmPassword")}
-                />
-                <span>{errors.confirmPassword?.message}</span>
+              <Input.Password
+                css={{ width: "200px" }}
+                label=""
+                placeholder="Confirmação de senha"
+                {...register("confirmPassword")}
+              />
+              <span>{errors.confirmPassword?.message}</span>
 
-                <div>
-                  <Button color="gradient" auto type="submit">
-                    Cadastrar
-                  </Button>
-                  <Button size="xs" onClick={(event) => navigate("/")}>
-                    Já possui registro ? Faça o seu login.
-                  </Button>
-                </div>
-              </DivFormInputs>
-            </div>
+              <BtnDiv>
+                <BtnCadastrar css={{ width: "200px" }} auto type="submit">
+                  Cadastrar
+                </BtnCadastrar>
+                <hr />
+                <Button
+                  css={{
+                    background: "transparent",
+                    height: "1.5rem",
+                    color: "white",
+                    width: "250px",
+                  }}
+                  onClick={(event) => navigate("/")}
+                >
+                  Já possui registro ? Faça o seu login.
+                </Button>
+              </BtnDiv>
+            </DivMain>
           </form>
         </DivForm>
-      </ContainerRegister>
+      </Main>
     </>
   );
 };

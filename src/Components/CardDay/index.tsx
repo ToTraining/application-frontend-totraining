@@ -3,7 +3,7 @@ import { ContainerDay, ContainerOverFlow } from "./style";
 
 interface ITitleCard {
   titulo: string;
-  workoutDay: IWorkout[] | [];
+  workoutDay: any;
 }
 
 interface IWorkout {
@@ -21,7 +21,7 @@ export const CardDay = ({ titulo, workoutDay }: ITitleCard) => {
     <ContainerDay>
       <h3>{titulo}</h3>
       <ContainerOverFlow>
-        {workoutDay.map((elemento) => {
+        {workoutDay.map((elemento : IWorkout) => {
           return (
             <Exercise
             title={elemento.title}

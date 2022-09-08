@@ -1,5 +1,17 @@
+import { Button } from "@nextui-org/react";
 import styled from "styled-components";
 
+export const AddExerciseBtn = styled(Button)`
+  background-color: #6bcacb;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.3);
+  color: black;
+
+  /* width: 100px !important; */
+
+  @media (min-width: 500px) {
+  }
+`;
 export const DivModal = styled.div`
   display: flex;
   justify-content: space-between;

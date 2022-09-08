@@ -5,7 +5,7 @@ import { DashBContext } from "../../Context/DashBContext";
 import { HiPencilAlt } from "react-icons/hi";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { ButtonEdit } from "./style";
+import { ButtonEdit, DivModal } from "./style";
 
 interface IExerciseModify {
   title: string;
@@ -18,128 +18,158 @@ interface IExerciseModify {
   userId?: number;
 }
 
-export const ModalEditWorkout = ({ id }: any) => {
-  const { modifyWorkout, getWork, oneWorkout } = useContext(DashBContext);
+interface IId {
+  id: number;
+}
 
+interface dataEditProf {
+  name: string;
+  email: string;
+  age: number;
+  password: string;
+  cellphone: number;
+  url: string;
+}
+
+export default function ModalEditWorkout({ id }: IId) {
+  const { getWork, modifyWorkout, oneWorkout } = useContext(DashBContext);
+  
   const [visible, setVisible] = useState(false);
-  const handler = () => {
-    getWork(id);
-    setVisible(true);
+  const handler = () =>{ 
+    getWork(id)
+    setVisible(true)
   };
-
   const closeHandler = () => {
     setVisible(false);
   };
 
   const schema = yup.object().shape({
-    // exercise: yup.string().required(),
-    // repetition: yup.number().required(),
-    // series: yup.number().required(),
-    // weigth: yup.number().required(),
-    // restTime: yup.number().required(),
-    // day: yup.string().required(),
+    /* password: yup.string().required("Senha obrigatória"), */
   });
 
   const { register, handleSubmit } = useForm<IExerciseModify>({
     resolver: yupResolver(schema),
   });
+  const testeStyle = {
+    content: {},
+  };
 
   return (
     <div>
-      <ButtonEdit onClick={handler}>
-        <HiPencilAlt />
-      </ButtonEdit>
+        <ButtonEdit onClick={handler}>
+         <HiPencilAlt />
+        </ButtonEdit>
 
       <Modal
-        css={{ backgroundColor: "#00224e" }}
+        css={{ backgroundColor: "#00224e", height: "21rem" }}
         closeButton
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}
       >
         <Modal.Header>
-          <Text id="modal-title" size={18} css={{ color: "white" }}>
-            Adicionar Exercícios
+          <Text id="modal-title" b size={19} css={{ color: "white" }}>
+          Editar Exercicio
           </Text>
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleSubmit(modifyWorkout)}>
-            <Input
-              css={{
-                backgroundColor: "#fff",
-                width: "49%",
+            <DivModal>
+              <Input
+                fullWidth
+                css={{
+                  backgroundColor: "#fff",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
+                {...register("title")}
+                initialValue={oneWorkout.title}
+                clearable
+                color="primary"
+                size="lg"
+                aria-label="Nome"
+                placeholder="Nome"
+              />
+            </DivModal>
+
+            <DivModal>
+              <Input
+                css={{
+                  backgroundColor: "#fff",
+                  width: "49%",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
+                {...register("rep")}
+                initialValue={oneWorkout.rep}
+                clearable
+                color="primary"
+                size="lg"
+                aria-label="Repetições"
+                placeholder="Repetições"
+              />
+              <Input
+                css={{
+                  backgroundColor: "#fff",
+                  width: "49%",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
+                {...register("time")}
+                initialValue={oneWorkout.time}
+                clearable
+                color="primary"
+                size="lg"
+                aria-label="Tempo"
+                placeholder="Tempo"
+              />
+            </DivModal>
+
+            <DivModal>
+              <Input
+                css={{
+                  backgroundColor: "#fff",
+                  width: "49%",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
+                {...register("set")}
+                initialValue={oneWorkout.set}
+                clearable
+                color="primary"
+                size="lg"
+                aria-label="Série"
+                placeholder="Série"
+              />
+
+              <Input
+                css={{
+                  backgroundColor: "#fff",
+                  width: "49%",
+                  marginTop: "8px",
+                  marginBottom: "8px",
+                }}
+                {...register("weigth")}
+                initialValue={oneWorkout.weigth}
+                clearable
+                color="primary"
+                size="lg"
+                aria-label="Peso"
+                placeholder="Peso"
+              />
+            </DivModal>
+
+            <DivModal>
+              <Button color="gradient" type="submit" 
+              css={{width:"100%",
                 marginTop: "8px",
-                marginBottom: "8px",
-              }}
-              {...register("title")}
-              clearable
-              color="primary"
-              size="lg"
-              placeholder="Nome"
-              value={oneWorkout.title}
-            />
-            <Input
-              css={{
-                backgroundColor: "#fff",
-                width: "49%",
-                marginTop: "8px",
-                marginBottom: "8px",
-              }}
-              {...register("rep")}
-              clearable
-              color="primary"
-              size="lg"
-              placeholder="Repetições"
-              value={oneWorkout.rep}
-            />
-            <Input
-              css={{
-                backgroundColor: "#fff",
-                width: "49%",
-                marginTop: "8px",
-                marginBottom: "8px",
-              }}
-              {...register("set")}
-              clearable
-              color="primary"
-              size="lg"
-              placeholder="Séries"
-              value={oneWorkout.set}
-            />
-            <Input
-              css={{
-                backgroundColor: "#fff",
-                width: "49%",
-                marginTop: "8px",
-                marginBottom: "8px",
-              }}
-              {...register("weigth")}
-              clearable
-              color="primary"
-              size="lg"
-              placeholder="Peso"
-              value={oneWorkout.weigth}
-            />
-            <Input
-              css={{
-                backgroundColor: "#fff",
-                width: "49%",
-                marginTop: "8px",
-                marginBottom: "8px",
-              }}
-              {...register("time")}
-              clearable
-              color="primary"
-              size="lg"
-              placeholder="Tempo de descanso"
-              value={oneWorkout.time}
-            />
-            <Button type="submit" auto>
-              Atualizar
-            </Button>
+                marginBottom: "8px"}}>
+                Atualizar
+              </Button>
+            </DivModal>
           </form>
         </Modal.Body>
       </Modal>
     </div>
   );
-};
+}

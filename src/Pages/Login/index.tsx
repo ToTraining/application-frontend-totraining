@@ -1,12 +1,24 @@
-import { Main } from "./style";
+import {
+  Main,
+  DivImg,
+  Header,
+  DivForm,
+  DivFormTitulo,
+  DivMain,
+  BtnDiv,
+  BtnLogin,
+} from "../Login/style";
+import LogoTipo from "../../assets/LogoTipo.png";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
-import { Input } from "@nextui-org/react";
-import loginImg from "../../assets/loginImg.png";
+import { Input, Button } from "@nextui-org/react";
 
 import { LoginContext } from "../../Context/LoginContext";
+import "react-toastify/dist/ReactToastify.css";
+import Pilates from "../../assets/Pilates.png";
+
 interface IForm {
   email: string;
   password: string;
@@ -28,39 +40,61 @@ const Login = () => {
   });
   return (
     <>
+      <Header>
+        <h1>toTraining</h1>
+        {/* <img src={LogoTipo} alt="Logotipo" /> */}
+      </Header>
       <Main>
-        <img src={loginImg} alt="imagemLogin" />
+        <DivImg>
+          <h1>toTraining</h1>
+          <img src={Pilates} alt="imagemLogin" />
+        </DivImg>
 
-        <div>
+        <DivForm>
           <form
             onSubmit={handleSubmit(async (data) => {
               await toLogin(data);
             })}
           >
-            <h3>Login</h3>
-            <Input
-              aria-label="E-mail"
-              placeholder="E-mail"
-              {...register("email")}
-            />
-            <p>{errors.email?.message}</p>
+            <DivMain>
+              <DivFormTitulo>
+                <h1>Login</h1>
+              </DivFormTitulo>
+              <Input
+                css={{ width: "195px" }}
+                aria-label="email"
+                placeholder="E-mail"
+                {...register("email")}
+              />
+              <p>{errors.email?.message}</p>
 
-            <Input.Password
-              aria-label="Senha"
-              placeholder="Password"
-              initialValue=""
-              {...register("password")}
-            />
+              <Input.Password
+                css={{ width: "195px" }}
+                aria-label="Senha"
+                placeholder="Password"
+                initialValue=""
+                {...register("password")}
+              />
 
-            <p>{errors.password?.message}</p>
-
-            <button type="submit">Login</button>
-
-            <button onClick={() => navigate("/register", { replace: true })}>
-              Ainda não tem conta ? Registre-se aqui.
-            </button>
+              <p>{errors.password?.message}</p>
+              <BtnDiv>
+                <BtnLogin type="submit">Login</BtnLogin>
+                <hr />
+                <Button
+                  css={{
+                    background: "transparent",
+                    height: "1.5rem",
+                    color: "white",
+                    fontSize: "10px",
+                  }}
+                  onClick={() => navigate("/register", { replace: true })}
+                >
+                  Ainda não tem conta ? Registre-se aqui.
+                </Button>
+              </BtnDiv>
+            </DivMain>
           </form>
-        </div>
+        </DivForm>
       </Main>
     </>
   );
