@@ -92,7 +92,12 @@ export default function ModalEditProfile() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form onSubmit={handleSubmit(modifyUser)}>
+          <form
+            onSubmit={handleSubmit((data) => {
+              closeHandler();
+              modifyUser(data);
+            })}
+          >
             <DivModal>
               <Input
                 css={{
@@ -186,6 +191,7 @@ export default function ModalEditProfile() {
                 }}
                 auto
                  color="error" onClick={toDeleteUser} >
+
                 Excluir perfil
               
               </Button>
@@ -195,6 +201,7 @@ export default function ModalEditProfile() {
                 }}
                 auto
                 color="gradient" type="submit" >
+
                 Atualizar perfil
               </Button>
             </DivModal>

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import LogoTipo from "../../assets/LogoTipo.png";
+import { motion } from "framer-motion";
 
 import * as React from "react";
 import { Input, Button } from "@nextui-org/react";
@@ -76,8 +77,14 @@ const Register = () => {
   } = useForm<IForm>({ resolver: yupResolver(formSchema) });
 
   return (
-    <>
-      <Header>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <>
+           <Header>
         <h1>toTraining</h1>
         {/* <img src={LogoTipo} alt="Logotipo" /> */}
       </Header>
@@ -87,96 +94,97 @@ const Register = () => {
           <img src={Yoga} alt="imagemRegister" />
         </DivImg>
 
-        <DivForm>
-          <form
-            onSubmit={handleSubmit(async (data) => {
-              await toRegister(data);
-            })}
-          >
-            <DivMain>
-              <DivFormTitulo>
-                <h1>Registro</h1>
-              </DivFormTitulo>
+          <DivForm>
+            <form
+              onSubmit={handleSubmit(async (data) => {
+                await toRegister(data);
+              })}
+            >
+              <DivMain>
+                <DivFormTitulo>
+                  <h1>Registro</h1>
+                </DivFormTitulo>
 
-              <Input
-                css={{ width: "200px" }}
-                label=""
-                placeholder="Nome"
-                {...register("name")}
-              />
-              <span>{errors.name?.message}</span>
+                <Input
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="Nome"
+                  {...register("name")}
+                />
+                <span>{errors.name?.message}</span>
 
-              <Input
-                css={{ width: "200px" }}
-                label=""
-                placeholder="E-mail"
-                {...register("email")}
-              />
-              <span>{errors.email?.message}</span>
+                <Input
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="E-mail"
+                  {...register("email")}
+                />
+                <span>{errors.email?.message}</span>
 
-              <Input
-                css={{ width: "200px" }}
-                label=""
-                placeholder="Telefone"
-                {...register("cellphone")}
-              />
-              <span>{errors.cellphone?.message}</span>
+                <Input
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="Telefone"
+                  {...register("cellphone")}
+                />
+                <span>{errors.cellphone?.message}</span>
 
-              <Input
-                css={{ width: "200px" }}
-                label=""
-                placeholder="Idade"
-                {...register("age")}
-              />
-              <span>{errors.age?.message}</span>
+                <Input
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="Idade"
+                  {...register("age")}
+                />
+                <span>{errors.age?.message}</span>
 
-              <Input
-                css={{ width: "200px" }}
-                label=""
-                placeholder="Imagem Url"
-                {...register("url")}
-              />
-              <span>{errors.url?.message}</span>
+                <Input
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="Imagem Url"
+                  {...register("url")}
+                />
+                <span>{errors.url?.message}</span>
 
-              <Input.Password
-                css={{ width: "200px" }}
-                label=""
-                placeholder="Password"
-                initialValue=""
-                {...register("password")}
-              />
-              <span>{errors.password?.message}</span>
+                <Input.Password
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="Password"
+                  initialValue=""
+                  {...register("password")}
+                />
+                <span>{errors.password?.message}</span>
 
-              <Input.Password
-                css={{ width: "200px" }}
-                label=""
-                placeholder="Confirmação de senha"
-                {...register("confirmPassword")}
-              />
-              <span>{errors.confirmPassword?.message}</span>
+                <Input.Password
+                  css={{ width: "200px" }}
+                  label=""
+                  placeholder="Confirmação de senha"
+                  {...register("confirmPassword")}
+                />
+                <span>{errors.confirmPassword?.message}</span>
 
-              <BtnDiv>
-                <BtnCadastrar css={{ width: "200px" }} auto type="submit">
-                  Cadastrar
-                </BtnCadastrar>
-                <hr />
-                <Button
-                  css={{
-                    background: "transparent",
-                    height: "1.5rem",
-                    color: "white",
-                    width: "250px",
-                  }}
-                  onClick={(event) => navigate("/")}
-                >
-                  Já possui registro ? Faça o seu login.
-                </Button>
-              </BtnDiv>
-            </DivMain>
-          </form>
-        </DivForm>
-      </Main>
-    </>
+                <BtnDiv>
+                  <BtnCadastrar css={{ width: "200px" }} auto type="submit">
+                    Cadastrar
+                  </BtnCadastrar>
+                  <hr />
+                  <Button
+                    css={{
+                      background: "transparent",
+                      height: "1.5rem",
+                      color: "white",
+                      width: "250px",
+                    }}
+                    onClick={(event) => navigate("/")}
+                  >
+                    Já possui registro ? Faça o seu login.
+                  </Button>
+                </BtnDiv>
+              </DivMain>
+            </form>
+          </DivForm>
+        </Main>
+      </>
+    </motion.div>
   );
 };
 
